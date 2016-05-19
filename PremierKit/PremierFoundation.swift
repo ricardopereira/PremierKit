@@ -58,7 +58,7 @@ extension NSURLResponse {
 
 extension NSData {
 
-    var toBase64: String {
+    var base64String: String {
         return self.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
     }
     

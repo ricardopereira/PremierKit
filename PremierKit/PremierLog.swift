@@ -24,7 +24,7 @@ struct LogOptions {
     static var level = LogLevel.NONE
 }
 
-func logMessage(message: String, level: LogLevel = .DEBUG, customAttributes: [String:AnyObject]? = nil, filename: NSString = __FILE__, line: Int = __LINE__, function: String = __FUNCTION__) {
+func logMessage(message: String, level: LogLevel = .DEBUG, customAttributes: [String:AnyObject]? = nil, filename: NSString = #file, line: Int = #line, function: String = #function) {
     assert(level != .NONE)
     if level.rawValue <= LogOptions.level.rawValue {
         NSLog("\(filename.lastPathComponent):\(line) \(function) \(level) \(message) [\(customAttributes)]")
