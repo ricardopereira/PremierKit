@@ -2,6 +2,8 @@
 
 #PremierKit
 
+Base code for iOS apps.
+
 ## Installation
 
 [CocoaPods]: http://cocoapods.org
