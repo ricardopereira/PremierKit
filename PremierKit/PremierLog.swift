@@ -11,7 +11,7 @@ import Foundation
 import Crashlytics
 #endif
 
-enum LogLevel: Int {
+public enum LogLevel: Int {
     case NONE
     case ERROR
     case WARN
@@ -20,11 +20,11 @@ enum LogLevel: Int {
     case VERBOSE
 }
 
-struct LogOptions {
+public struct LogOptions {
     static var level = LogLevel.NONE
 }
 
-func logMessage(message: String, level: LogLevel = .DEBUG, customAttributes: [String:AnyObject]? = nil, filename: NSString = #file, line: Int = #line, function: String = #function) {
+public func logMessage(message: String, level: LogLevel = .DEBUG, customAttributes: [String:AnyObject]? = nil, filename: NSString = #file, line: Int = #line, function: String = #function) {
     assert(level != .NONE)
     if level.rawValue <= LogOptions.level.rawValue {
         NSLog("\(filename.lastPathComponent):\(line) \(function) \(level) \(message) [\(customAttributes)]")

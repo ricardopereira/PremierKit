@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Box<T> {
+public final class Box<T> {
     let value: T
 
     init(_ value: T) {
@@ -16,7 +16,7 @@ final class Box<T> {
     }
 }
 
-enum Result<T, E: ErrorType> {
+public enum Result<T, E: ErrorType> {
     case Success(T)
     case Failure(E)
 
