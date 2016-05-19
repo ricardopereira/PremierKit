@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     /// Trim whitespace
     var trim: String {
@@ -43,7 +43,7 @@ extension String {
     
 }
 
-extension NSURLResponse {
+public extension NSURLResponse {
     
     var httpStatusCode: Int {
         if let httpResponse = self as? NSHTTPURLResponse {
@@ -56,7 +56,7 @@ extension NSURLResponse {
     
 }
 
-extension NSData {
+public extension NSData {
 
     var base64String: String {
         return self.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
@@ -68,7 +68,7 @@ extension NSData {
     
 }
 
-extension NSObject {
+public extension NSObject {
 
     var toBase64: String {
         return (try? NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions(rawValue: 0)).base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))) ?? ""
@@ -76,7 +76,7 @@ extension NSObject {
     
 }
 
-extension NSDate: Comparable { }
+public extension NSDate: Comparable { }
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     return (lhs.compare(rhs) == .OrderedSame)
@@ -98,13 +98,13 @@ public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
     return (lhs > rhs || lhs == rhs)
 }
 
-extension NSDate {
+public extension NSDate {
     func isBefore(other: NSDate) -> Bool {
         return self.compare(other) == NSComparisonResult.OrderedAscending
     }
 }
 
-extension NSRegularExpression {
+public extension NSRegularExpression {
 
     class func match(value: String?, pattern: String) -> Bool {
         guard let value = value else {

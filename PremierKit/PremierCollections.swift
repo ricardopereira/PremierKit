@@ -9,7 +9,7 @@
 import Foundation
 
 // Unite/Combine immutable dictionaries
-func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
+public func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
     guard let right = right else { return left }
     return left.reduce(right) {
         var new = $0 as [K:V]
@@ -19,7 +19,7 @@ func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V>
 }
 
 // Unite/Combine mutable dictionaries
-func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
+public func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
     guard let right = right else { return }
     right.forEach { key, value in
         left.updateValue(value, forKey: key)

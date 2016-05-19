@@ -8,14 +8,14 @@
 
 import UIKit
 
-struct PremierDialogOptions {
+public struct PremierDialogOptions {
     let parent: UIViewController
     let title: String
     let placeholder: String
     let moreActions: [String]
 }
 
-func askString(options: PremierDialogOptions, success: ([String])->(), fields: Optional<(UITextField)->()> = nil) {
+public func askString(options: PremierDialogOptions, success: ([String])->(), fields: Optional<(UITextField)->()> = nil) {
     let alertController = UIAlertController(title: options.title, message: nil, preferredStyle: .Alert)
     
     let addStringAction = UIAlertAction(title: "Add", style: .Default) { action in

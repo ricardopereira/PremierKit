@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIFont {
+public extension UIFont {
     
     /// Size of text
     func sizeOfString(string: String, constrainedToWidth width: CGFloat) -> CGSize {

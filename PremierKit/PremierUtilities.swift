@@ -8,7 +8,7 @@
 
 import Foundation
 
-public func delay(seconds: NSTimeInterval, closure: ()->()) {
+public public func delay(seconds: NSTimeInterval, closure: ()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,
