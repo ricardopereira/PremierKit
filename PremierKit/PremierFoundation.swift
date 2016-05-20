@@ -11,33 +11,33 @@ import Foundation
 public extension String {
     
     /// Trim whitespace
-    var trim: String {
+    public var trim: String {
         return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     }
     
     /// Email validation
-    var isEmail: Bool {
+    public var isEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(self)
     }
     
     /// Email validation
-    var isPhoneNumber: Bool {
+    public var isPhoneNumber: Bool {
         let phoneRegex = "\\+351[0-9]{9}"
         return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluateWithObject(self)
     }
     
     /// Double value
-    var toDouble: Double? {
+    public var toDouble: Double? {
         return (self as NSString).doubleValue
     }
     
     /// Integer value
-    var toInteger: Int? {
+    public var toInteger: Int? {
         return (self as NSString).integerValue
     }
 
-    func replace(value: String, withString string: String) -> String {
+    public func replace(value: String, withString string: String) -> String {
         return self.stringByReplacingOccurrencesOfString(value, withString: string, options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
     
@@ -45,7 +45,7 @@ public extension String {
 
 public extension NSURLResponse {
     
-    var httpStatusCode: Int {
+    public var httpStatusCode: Int {
         if let httpResponse = self as? NSHTTPURLResponse {
             return httpResponse.statusCode
         }
@@ -58,11 +58,11 @@ public extension NSURLResponse {
 
 public extension NSData {
 
-    var base64String: String {
+    public var base64String: String {
         return self.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
     }
     
-    var utf8String: String {
+    public var utf8String: String {
         return NSString(data: self, encoding: NSUTF8StringEncoding) as? String ?? ""
     }
     
@@ -70,7 +70,7 @@ public extension NSData {
 
 public extension NSObject {
 
-    var toBase64: String {
+    public var toBase64: String {
         return (try? NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions(rawValue: 0)).base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))) ?? ""
     }
     
@@ -106,7 +106,7 @@ public extension NSDate {
 
 public extension NSRegularExpression {
 
-    class func match(value: String?, pattern: String) -> Bool {
+    public class func match(value: String?, pattern: String) -> Bool {
         guard let value = value else {
             return false
         }
@@ -116,7 +116,7 @@ public extension NSRegularExpression {
         return regex.rangeOfFirstMatchInString(value, options: [], range: range).location != NSNotFound
     }
 
-    class func extract(value: String?, pattern: String) -> String? {
+    public class func extract(value: String?, pattern: String) -> String? {
         guard let value = value else {
             return nil
         }

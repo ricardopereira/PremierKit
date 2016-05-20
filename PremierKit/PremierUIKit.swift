@@ -11,7 +11,7 @@ import UIKit
 public extension UIFont {
     
     /// Size of text
-    func sizeOfString(string: String, constrainedToWidth width: CGFloat) -> CGSize {
+    public func sizeOfString(string: String, constrainedToWidth width: CGFloat) -> CGSize {
         return (string as NSString).boundingRectWithSize(CGSize(width: width, height: CGFloat(DBL_MAX)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
     }
 

@@ -9,9 +9,9 @@
 import Foundation
 
 public final class Box<T> {
-    let value: T
+    public let value: T
 
-    init(_ value: T) {
+    public init(_ value: T) {
         self.value = value
     }
 }
@@ -20,11 +20,11 @@ public enum Result<T, E: ErrorType> {
     case Success(T)
     case Failure(E)
 
-    init(value: T) {
+    public init(value: T) {
         self = .Success(value)
     }
 
-    init(error: E) {
+    public init(error: E) {
         self = .Failure(error)
     }
 }
