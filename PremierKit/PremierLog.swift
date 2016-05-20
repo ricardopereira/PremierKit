@@ -21,7 +21,7 @@ public enum LogLevel: Int {
 }
 
 public struct LogOptions {
-    static var level = LogLevel.NONE
+    public static var level = LogLevel.NONE
 }
 
 public func logMessage(message: String, level: LogLevel = .DEBUG, customAttributes: [String:AnyObject]? = nil, filename: NSString = #file, line: Int = #line, function: String = #function) {
