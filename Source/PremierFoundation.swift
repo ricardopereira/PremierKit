@@ -37,8 +37,29 @@ public extension String {
         return (self as NSString).integerValue
     }
 
+    /// Replace a string with another one
     public func replace(value: String, withString string: String) -> String {
         return self.stringByReplacingOccurrencesOfString(value, withString: string, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+
+    /// Length of Bytes using UTF8 encoding
+    var length: Int {
+        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    }
+
+    /// String is not empty
+    var isNotEmpty: Bool {
+        return !isEmpty
+    }
+
+    /// Get a substring to index
+    func substringToIndex(index: Int) -> String {
+        return substringToIndex(self.startIndex.advancedBy(index))
+    }
+
+    /// Get a substring from index
+    func substringFromIndex(index: Int) -> String {
+        return substringFromIndex(self.startIndex.advancedBy(index))
     }
     
 }
@@ -76,7 +97,13 @@ public extension NSObject {
     
 }
 
-extension NSDate: Comparable { }
+extension NSDate: Comparable {
+
+    var timeIntervalUntilNow: NSTimeInterval {
+        return -timeIntervalSinceNow
+    }
+
+}
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     return (lhs.compare(rhs) == .OrderedSame)
