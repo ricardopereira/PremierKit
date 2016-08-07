@@ -7,6 +7,7 @@
 //
 
 import Foundation
+// FIXME: not working
 #if FABRIC
 import Crashlytics
 #endif
