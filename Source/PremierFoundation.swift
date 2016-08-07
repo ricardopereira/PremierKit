@@ -43,22 +43,22 @@ public extension String {
     }
 
     /// Length of Bytes using UTF8 encoding
-    var length: Int {
+    public var length: Int {
         return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
     }
 
     /// String is not empty
-    var isNotEmpty: Bool {
+    public var isNotEmpty: Bool {
         return !isEmpty
     }
 
     /// Get a substring to index
-    func substringToIndex(index: Int) -> String {
+    public func substringToIndex(index: Int) -> String {
         return substringToIndex(self.startIndex.advancedBy(index))
     }
 
     /// Get a substring from index
-    func substringFromIndex(index: Int) -> String {
+    public func substringFromIndex(index: Int) -> String {
         return substringFromIndex(self.startIndex.advancedBy(index))
     }
     
@@ -99,7 +99,7 @@ public extension NSObject {
 
 extension NSDate: Comparable {
 
-    var timeIntervalUntilNow: NSTimeInterval {
+    public var timeIntervalUntilNow: NSTimeInterval {
         return -timeIntervalSinceNow
     }
 
