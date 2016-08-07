@@ -37,6 +37,9 @@ Pods/
 
 # Carthage
 Carthage/
+# No dependencies
+Cartfile
+Cartfile.resolved
 
 # Fastlane
 fastlane/report.xml
