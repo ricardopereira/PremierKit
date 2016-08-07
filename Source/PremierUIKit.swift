@@ -415,6 +415,64 @@ public extension ViewControllerPresentDialogs {
 }
 
 
+// MARK: UIFieldSeparator
+
+public class UIFieldSeparator: UIView {
+
+    private var originalColor: UIColor = .blackColor()
+
+    private lazy var errorLabel = UILabel()
+    public var error: String? {
+        didSet {
+            guard let errorMessage = error else {
+                self.backgroundColor = originalColor
+                errorLabel.removeFromSuperview()
+                return
+            }
+            if errorMessage.isEmpty == false && errorLabel.superview == nil {
+                addSubview(errorLabel)
+                errorLabel.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 18)
+                errorLabel.textAlignment = .Right
+                self.originalColor = backgroundColor ?? .blackColor()
+                self.backgroundColor = .redColor()
+                errorLabel.textColor = self.backgroundColor
+                errorLabel.font = errorLabel.font.fontWithSize(10)
+                setErrorMessageWithAnimation(errorMessage)
+            }
+            else if errorMessage.isEmpty == false {
+                setErrorMessageWithAnimation(errorMessage)
+            }
+            else {
+                self.backgroundColor = originalColor
+                errorLabel.removeFromSuperview()
+            }
+        }
+    }
+
+    private func setErrorMessageWithAnimation(message: String) {
+        if self.errorLabel.trimmedText == message {
+            return
+        }
+        let fadeTransition = CATransition()
+        fadeTransition.duration = 0.2
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.errorLabel.text = message
+            self.errorLabel.layer.addAnimation(fadeTransition, forKey: kCATransition)
+        }
+        errorLabel.text = ""
+        errorLabel.layer.addAnimation(fadeTransition, forKey: kCATransition)
+        CATransaction.commit()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        errorLabel.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 18)
+    }
+    
+}
+
+
 // UIViewController extension
 
 public extension UIViewController {
