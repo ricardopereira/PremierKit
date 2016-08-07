@@ -17,6 +17,7 @@
 		D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D261D56AFA80023F072 /* PremierUtilities.swift */; };
 		D7B51D331D56B2CA0023F072 /* PremierSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */; };
 		D7B51D351D56B2D20023F072 /* PremierNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D341D56B2D20023F072 /* PremierNetwork.swift */; };
+		D7B51D3E1D57B0420023F072 /* PremierStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D3D1D57B0420023F072 /* PremierStyling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D7B51D261D56AFA80023F072 /* PremierUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUtilities.swift; path = Source/PremierUtilities.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierSecurity.swift; path = Source/PremierSecurity.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D341D56B2D20023F072 /* PremierNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierNetwork.swift; path = Source/PremierNetwork.swift; sourceTree = SOURCE_ROOT; };
+		D7B51D3D1D57B0420023F072 /* PremierStyling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierStyling.swift; path = Source/PremierStyling.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				D7B51D231D56AFA80023F072 /* PremierLog.swift */,
 				D7B51D341D56B2D20023F072 /* PremierNetwork.swift */,
 				D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */,
+				D7B51D3D1D57B0420023F072 /* PremierStyling.swift */,
 				D7B51D241D56AFA80023F072 /* PremierTypes.swift */,
 				D7B51D251D56AFA80023F072 /* PremierUIKit.swift */,
 				D7B51D261D56AFA80023F072 /* PremierUtilities.swift */,
@@ -173,6 +176,7 @@
 				D7B51D2C1D56AFA80023F072 /* PremierUIKit.swift in Sources */,
 				D7B51D331D56B2CA0023F072 /* PremierSecurity.swift in Sources */,
 				D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */,
+				D7B51D3E1D57B0420023F072 /* PremierStyling.swift in Sources */,
 				D7B51D291D56AFA80023F072 /* PremierFoundation.swift in Sources */,
 				D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */,
 			);
