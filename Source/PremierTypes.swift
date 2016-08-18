@@ -8,6 +8,10 @@
 
 import Foundation
 
+public struct NoError: ErrorType {
+    public init() {}
+}
+
 public final class Box<T> {
     public let value: T
 
