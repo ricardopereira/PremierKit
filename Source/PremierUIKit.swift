@@ -25,6 +25,28 @@ public extension UIView {
 
 }
 
+public extension UIWindow {
+
+    public var visibleViewController: UIViewController? {
+        return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
+    }
+
+    public static func getVisibleViewControllerFrom(viewController: UIViewController?) -> UIViewController? {
+        if let navigationController = viewController as? UINavigationController {
+            return UIWindow.getVisibleViewControllerFrom(navigationController.visibleViewController)
+        } else if let tabBarController = viewController as? UITabBarController {
+            return UIWindow.getVisibleViewControllerFrom(tabBarController.selectedViewController)
+        } else {
+            if let presentedViewController = viewController?.presentedViewController {
+                return UIWindow.getVisibleViewControllerFrom(presentedViewController)
+            } else {
+                return viewController
+            }
+        }
+    }
+
+}
+
 public extension UIFont {
     
     /// Size of text
@@ -182,6 +204,7 @@ public extension ViewControllerPresentScroll where Self: UIViewController {
             action: handleContainerTapGestureSelector))
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
             action: handleContainerTapGestureSelector))
+        // FIXME: should be recursive!
         containerView.subviews.flatMap{ $0 as? UITextField }.forEach { field in
             field.delegate = self
         }
