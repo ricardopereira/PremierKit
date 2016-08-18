@@ -14,7 +14,9 @@ public func delay(seconds: NSTimeInterval, closure: ()->()) {
             DISPATCH_TIME_NOW,
             Int64(seconds * Double(NSEC_PER_SEC))
         ),
-        dispatch_get_main_queue(), closure)
+        dispatch_get_main_queue(),
+        closure
+    )
 }
 
 
