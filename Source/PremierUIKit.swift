@@ -11,12 +11,12 @@ import UIKit
 public extension UIView {
 
     /// Find the first responder
-    public func findFirstResponder() -> UIView? {
+    public func getFirstResponder() -> UIView? {
         if self.isFirstResponder() {
             return self
         }
         for subview in subviews {
-            if let result = subview.findFirstResponder() {
+            if let result = subview.getFirstResponder() {
                 return result
             }
         }
