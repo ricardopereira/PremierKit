@@ -23,6 +23,15 @@ public extension UIView {
         return nil
     }
 
+    /// Add a mask by rounding corners
+    public func setCustomCornerRadius(cornerRadius: CGFloat, corners: UIRectCorner) {
+        layer.mask = { layer in
+            let path = UIBezierPath(roundedRect:self.bounds, byRoundingCorners:corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+            layer.path = path.CGPath
+            return layer
+        }(CAShapeLayer())
+    }
+
 }
 
 public extension UIWindow {
