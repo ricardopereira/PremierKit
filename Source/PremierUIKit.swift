@@ -32,6 +32,20 @@ public extension UIView {
         }(CAShapeLayer())
     }
 
+    /// TODO
+    public func activateConstraints(view: UIView) {
+        if #available(iOS 9.0, *) {
+            NSLayoutConstraint.activateConstraints([
+                self.topAnchor.constraintEqualToAnchor(view.topAnchor),
+                self.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
+                self.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
+                self.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
+            ])
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
 }
 
 public extension UIWindow {
