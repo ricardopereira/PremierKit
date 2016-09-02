@@ -54,14 +54,20 @@ public extension String {
 
     /// Get a substring to index
     public func substringToIndex(index: Int) -> String {
+        if index > length - 1 {
+            return ""
+        }
         return substringToIndex(self.startIndex.advancedBy(index))
     }
 
     /// Get a substring from index
     public func substringFromIndex(index: Int) -> String {
+        if index > length - 1 {
+            return ""
+        }
         return substringFromIndex(self.startIndex.advancedBy(index))
     }
-    
+
 }
 
 public extension NSURLResponse {
