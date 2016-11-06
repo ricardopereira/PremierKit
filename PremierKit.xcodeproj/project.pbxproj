@@ -11,7 +11,6 @@
 		D7B51D271D56AFA80023F072 /* PremierCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D201D56AFA80023F072 /* PremierCollections.swift */; };
 		D7B51D281D56AFA80023F072 /* PremierDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D211D56AFA80023F072 /* PremierDialogs.swift */; };
 		D7B51D291D56AFA80023F072 /* PremierFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D221D56AFA80023F072 /* PremierFoundation.swift */; };
-		D7B51D2A1D56AFA80023F072 /* PremierLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D231D56AFA80023F072 /* PremierLog.swift */; };
 		D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D241D56AFA80023F072 /* PremierTypes.swift */; };
 		D7B51D2C1D56AFA80023F072 /* PremierUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D251D56AFA80023F072 /* PremierUIKit.swift */; };
 		D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D261D56AFA80023F072 /* PremierUtilities.swift */; };
@@ -26,7 +25,6 @@
 		D7B51D201D56AFA80023F072 /* PremierCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierCollections.swift; path = Source/PremierCollections.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D211D56AFA80023F072 /* PremierDialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierDialogs.swift; path = Source/PremierDialogs.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D221D56AFA80023F072 /* PremierFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierFoundation.swift; path = Source/PremierFoundation.swift; sourceTree = SOURCE_ROOT; };
-		D7B51D231D56AFA80023F072 /* PremierLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierLog.swift; path = Source/PremierLog.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D241D56AFA80023F072 /* PremierTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierTypes.swift; path = Source/PremierTypes.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D251D56AFA80023F072 /* PremierUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUIKit.swift; path = Source/PremierUIKit.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D261D56AFA80023F072 /* PremierUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUtilities.swift; path = Source/PremierUtilities.swift; sourceTree = SOURCE_ROOT; };
@@ -77,7 +75,6 @@
 				D7B51D201D56AFA80023F072 /* PremierCollections.swift */,
 				D7B51D211D56AFA80023F072 /* PremierDialogs.swift */,
 				D7B51D221D56AFA80023F072 /* PremierFoundation.swift */,
-				D7B51D231D56AFA80023F072 /* PremierLog.swift */,
 				D7B51D341D56B2D20023F072 /* PremierNetwork.swift */,
 				D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */,
 				D7B51D241D56AFA80023F072 /* PremierTypes.swift */,
@@ -167,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7B51D281D56AFA80023F072 /* PremierDialogs.swift in Sources */,
-				D7B51D2A1D56AFA80023F072 /* PremierLog.swift in Sources */,
 				D7B51D351D56B2D20023F072 /* PremierNetwork.swift in Sources */,
 				D7B51D271D56AFA80023F072 /* PremierCollections.swift in Sources */,
 				D7B51D2C1D56AFA80023F072 /* PremierUIKit.swift in Sources */,
@@ -279,7 +275,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 2016.08.22.08.42;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PremierKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -299,7 +295,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 2016.08.22.08.42;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PremierKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
