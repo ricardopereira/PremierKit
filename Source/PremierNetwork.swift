@@ -10,32 +10,32 @@ import UIKit
 
 public struct NetworkActivityManager {
 
-    private static var activeActivities = [String:Int]()
+    fileprivate static var activeActivities = [String:Int]()
 
-    private init() {}
+    fileprivate init() {}
 
-    public static func hasActivity(name: String) -> Bool {
+    public static func hasActivity(_ name: String) -> Bool {
         return (activeActivities[name] ?? 0) > 0
     }
 
-    public static func addActivity(name: String = "unknown") {
+    public static func addActivity(_ name: String = "unknown") {
         if activeActivities.count == 0 {
             #if os(iOS)
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             #endif
         }
         activeActivities[name] = (activeActivities[name] ?? 0) + 1
     }
 
-    public static func removeActivity(name: String = "unknown") {
+    public static func removeActivity(_ name: String = "unknown") {
         if activeActivities.count > 0 {
             activeActivities[name] = (activeActivities[name] ?? 0) - 1
             if !hasActivity(name) {
-                activeActivities.removeValueForKey(name)
+                activeActivities.removeValue(forKey: name)
             }
             if activeActivities.count == 0 {
                 #if os(iOS)
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 #endif
             }
         }

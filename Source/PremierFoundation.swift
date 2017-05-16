@@ -12,19 +12,19 @@ public extension String {
     
     /// Trim whitespace
     public var trim: String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
     
     /// Email validation
     public var isEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(self)
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
     
     /// Email validation
     public var isPhoneNumber: Bool {
         let phoneRegex = "\\+351[0-9]{9}"
-        return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluateWithObject(self)
+        return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluate(with: self)
     }
     
     /// Double value
@@ -38,13 +38,13 @@ public extension String {
     }
 
     /// Replace a string with another one
-    public func replace(value: String, withString string: String) -> String {
-        return self.stringByReplacingOccurrencesOfString(value, withString: string, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    public func replace(_ value: String, withString string: String) -> String {
+        return self.replacingOccurrences(of: value, with: string, options: NSString.CompareOptions.literal, range: nil)
     }
 
     /// Length of Bytes using UTF8 encoding
     public var length: Int {
-        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        return self.lengthOfBytes(using: String.Encoding.utf8)
     }
 
     /// String is not empty
@@ -53,27 +53,27 @@ public extension String {
     }
 
     /// Get a substring to index
-    public func substringToIndex(index: Int) -> String {
+    public func substringToIndex(_ index: Int) -> String {
         if index > length - 1 {
             return ""
         }
-        return substringToIndex(self.startIndex.advancedBy(index))
+        return substring(to: self.characters.index(self.startIndex, offsetBy: index))
     }
 
     /// Get a substring from index
-    public func substringFromIndex(index: Int) -> String {
+    public func substringFromIndex(_ index: Int) -> String {
         if index > length - 1 {
             return ""
         }
-        return substringFromIndex(self.startIndex.advancedBy(index))
+        return substring(from: self.characters.index(self.startIndex, offsetBy: index))
     }
 
 }
 
-public extension NSURLResponse {
+public extension URLResponse {
     
     public var httpStatusCode: Int {
-        if let httpResponse = self as? NSHTTPURLResponse {
+        if let httpResponse = self as? HTTPURLResponse {
             return httpResponse.statusCode
         }
         else {
@@ -83,14 +83,14 @@ public extension NSURLResponse {
     
 }
 
-public extension NSData {
+public extension Data {
 
     public var base64String: String {
-        return self.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        return self.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
     }
     
     public var utf8String: String {
-        return NSString(data: self, encoding: NSUTF8StringEncoding) as? String ?? ""
+        return NSString(data: self, encoding: String.Encoding.utf8.rawValue) as? String ?? ""
     }
     
 }
@@ -98,68 +98,46 @@ public extension NSData {
 public extension NSObject {
 
     public var toBase64: String {
-        return (try? NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions(rawValue: 0)).base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))) ?? ""
+        return (try? JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions(rawValue: 0)).base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))) ?? ""
     }
     
 }
 
-extension NSDate: Comparable {
+public extension Date {
 
-    public var timeIntervalUntilNow: NSTimeInterval {
+    public var timeIntervalUntilNow: TimeInterval {
         return -timeIntervalSinceNow
     }
 
-}
-
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return (lhs.compare(rhs) == .OrderedSame)
-}
-
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return (lhs.compare(rhs) == .OrderedAscending)
-}
-
-public func >(lhs: NSDate, rhs: NSDate) -> Bool {
-    return (lhs.compare(rhs) == .OrderedDescending)
-}
-
-public func <=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return (lhs < rhs || lhs == rhs)
-}
-
-public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return (lhs > rhs || lhs == rhs)
-}
-
-public extension NSDate {
-    func isBefore(other: NSDate) -> Bool {
-        return self.compare(other) == NSComparisonResult.OrderedAscending
+    func isBefore(_ other: Date) -> Bool {
+        return self.compare(other) == ComparisonResult.orderedAscending
     }
+
 }
 
 public extension NSRegularExpression {
 
-    public class func match(value: String?, pattern: String) -> Bool {
+    public class func match(_ value: String?, pattern: String) -> Bool {
         guard let value = value else {
             return false
         }
-        let options = NSRegularExpressionOptions()
+        let options = NSRegularExpression.Options()
         let regex = try! NSRegularExpression(pattern: pattern, options: options)
-        let range = NSMakeRange(0, value.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        return regex.rangeOfFirstMatchInString(value, options: [], range: range).location != NSNotFound
+        let range = NSMakeRange(0, value.lengthOfBytes(using: String.Encoding.utf8))
+        return regex.rangeOfFirstMatch(in: value, options: [], range: range).location != NSNotFound
     }
 
-    public class func extract(value: String?, pattern: String) -> String? {
+    public class func extract(_ value: String?, pattern: String) -> String? {
         guard let value = value else {
             return nil
         }
-        let options = NSRegularExpressionOptions()
+        let options = NSRegularExpression.Options()
         let regex = try! NSRegularExpression(pattern: pattern, options: options)
-        let range = NSMakeRange(0, value.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        let result = regex.firstMatchInString(value, options: [], range: range)
-        guard let textRange = result?.rangeAtIndex(0) else { return nil }
-        let convertedRange =  value.startIndex.advancedBy(textRange.location)..<value.startIndex.advancedBy(textRange.location+textRange.length)
-        return value.substringWithRange(convertedRange)
+        let range = NSMakeRange(0, value.lengthOfBytes(using: String.Encoding.utf8))
+        let result = regex.firstMatch(in: value, options: [], range: range)
+        guard let textRange = result?.rangeAt(0) else { return nil }
+        let convertedRange =  value.characters.index(value.startIndex, offsetBy: textRange.location)..<value.characters.index(value.startIndex, offsetBy: textRange.location+textRange.length)
+        return value.substring(with: convertedRange)
     }
     
 }

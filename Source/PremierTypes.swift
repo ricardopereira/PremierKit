@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NoError: ErrorType {
+public struct NoError: Error {
     public init() {}
 }
 
@@ -20,7 +20,7 @@ public final class Box<T> {
     }
 }
 
-public enum Result<T, E: ErrorType> {
+public enum Result<T, E: Error> {
     case Success(T)
     case Failure(E)
 

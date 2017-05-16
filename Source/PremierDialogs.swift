@@ -15,10 +15,10 @@ public struct PremierDialogOptions {
     let moreActions: [String]
 }
 
-public func askString(options: PremierDialogOptions, success: ([String])->(), fields: Optional<(UITextField)->()> = nil) {
-    let alertController = UIAlertController(title: options.title, message: nil, preferredStyle: .Alert)
+public func askString(_ options: PremierDialogOptions, success: @escaping ([String])->(), fields: Optional<(UITextField)->()> = nil) {
+    let alertController = UIAlertController(title: options.title, message: nil, preferredStyle: .alert)
     
-    let addStringAction = UIAlertAction(title: "Add", style: .Default) { action in
+    let addStringAction = UIAlertAction(title: "Add", style: .default) { action in
         // Did press
         var values: [String] = []
         guard let textFields = alertController.textFields else { return }
@@ -28,28 +28,28 @@ public func askString(options: PremierDialogOptions, success: ([String])->(), fi
 
         success(values)
     }
-    addStringAction.enabled = false
+    addStringAction.isEnabled = false
     
-    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     
     // Text field: string value
-    alertController.addTextFieldWithConfigurationHandler { textField in
+    alertController.addTextField { textField in
         textField.placeholder = options.placeholder
         
-        NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { notification in
-            addStringAction.enabled = textField.text != ""
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { notification in
+            addStringAction.isEnabled = textField.text != ""
         }
     }
 
     if !options.moreActions.isEmpty {
         for action in options.moreActions {
-            alertController.addTextFieldWithConfigurationHandler { textField in
+            alertController.addTextField { textField in
                 textField.placeholder = action
                 // FIXME:
-                textField.keyboardType = .DecimalPad
+                textField.keyboardType = .decimalPad
 
-                NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { notification in
-                    addStringAction.enabled = textField.text != ""
+                NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { notification in
+                    addStringAction.isEnabled = textField.text != ""
                 }
             }
         }
@@ -60,5 +60,5 @@ public func askString(options: PremierDialogOptions, success: ([String])->(), fi
     alertController.addAction(addStringAction)
     alertController.addAction(cancelAction)
     
-    options.parent.presentViewController(alertController, animated: true, completion: nil)
+    options.parent.present(alertController, animated: true, completion: nil)
 }

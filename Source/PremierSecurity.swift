@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class KeychainPassword {
+open class KeychainPassword {
 
     let bundleIdentifier: String
     let account: String
@@ -22,21 +22,21 @@ public class KeychainPassword {
         var attributes = [String : AnyObject]()
         attributes[String(kSecClass)] = kSecClassGenericPassword
         // Item data can only be accessed while the device is unlocked.
-        attributes[String(kSecAttrAccessible)] = String(kSecAttrAccessibleWhenUnlocked)
-        attributes[String(kSecAttrService)] = bundleIdentifier
-        attributes[String(kSecAttrAccount)] = account
+        attributes[String(kSecAttrAccessible)] = String(kSecAttrAccessibleWhenUnlocked) as NSString
+        attributes[String(kSecAttrService)] = bundleIdentifier as AnyObject?
+        attributes[String(kSecAttrAccount)] = account as AnyObject?
         return attributes
     }
 
-    public func setValue<T: AnyObject>(value: T) -> Bool {
+    open func setValue<T: AnyObject>(_ value: T) -> Bool {
         var attributes = genericPasswordAttributes()
-        let archivedData = NSKeyedArchiver.archivedDataWithRootObject(value)
-        attributes[String(kSecValueData)] = archivedData
+        let archivedData = NSKeyedArchiver.archivedData(withRootObject: value)
+        attributes[String(kSecValueData)] = archivedData as AnyObject?
 
-        var statusCode = SecItemAdd(attributes, nil)
+        var statusCode = SecItemAdd(attributes as CFDictionary, nil)
         if statusCode == errSecDuplicateItem {
-            SecItemDelete(attributes)
-            statusCode = SecItemAdd(attributes, nil)
+            SecItemDelete(attributes as CFDictionary)
+            statusCode = SecItemAdd(attributes as CFDictionary, nil)
         }
         if statusCode != errSecSuccess {
             return false
@@ -44,23 +44,23 @@ public class KeychainPassword {
         return true
     }
 
-    public func removeValue() -> Bool {
+    open func removeValue() -> Bool {
         let attributes = genericPasswordAttributes()
-        let statusCode = SecItemDelete(attributes)
+        let statusCode = SecItemDelete(attributes as CFDictionary)
         if statusCode != errSecSuccess {
             return false
         }
         return true
     }
 
-    public func getValue<T>() -> T? {
+    open func getValue<T>() -> T? {
         var attributes = genericPasswordAttributes()
-        attributes[String(kSecReturnData)] = true
-        attributes[String(kSecReturnAttributes)] = true
+        attributes[String(kSecReturnData)] = true as AnyObject?
+        attributes[String(kSecReturnAttributes)] = true as AnyObject?
 
         var match: AnyObject?
-        let statusCode = withUnsafeMutablePointer(&match) { pointer in
-            SecItemCopyMatching(attributes, UnsafeMutablePointer(pointer))
+        let statusCode = withUnsafeMutablePointer(to: &match) { pointer in
+            SecItemCopyMatching(attributes as CFDictionary, UnsafeMutablePointer(pointer))
         }
         if statusCode != errSecSuccess {
             return nil
@@ -68,10 +68,10 @@ public class KeychainPassword {
         guard let result = match as? [String : AnyObject] else {
             return nil
         }
-        guard let valueData = result[String(kSecValueData)] as? NSData else {
+        guard let valueData = result[String(kSecValueData)] as? Data else {
             return nil
         }
-        return NSKeyedUnarchiver.unarchiveObjectWithData(valueData) as? T ?? nil
+        return NSKeyedUnarchiver.unarchiveObject(with: valueData) as? T ?? nil
     }
     
 }
