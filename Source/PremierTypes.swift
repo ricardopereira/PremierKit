@@ -21,28 +21,28 @@ public final class Box<T> {
 }
 
 public enum Result<T, E: Error> {
-    case Success(T)
-    case Failure(E)
+    case success(T)
+    case failure(E)
 
     public init(value: T) {
-        self = .Success(value)
+        self = .success(value)
     }
 
     public init(error: E) {
-        self = .Failure(error)
+        self = .failure(error)
     }
 
     public var success: T? {
         switch self {
-        case .Success(let value):
+        case .success(let value):
             return value
-        case .Failure(_):
+        case .failure(_):
             return nil
         }
     }
 
     public var failure: E? {
-        if case .Failure(let error) = self {
+        if case .failure(let error) = self {
             return error
         }
         else {

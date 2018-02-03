@@ -90,7 +90,7 @@ public extension Data {
     }
     
     public var utf8String: String {
-        return NSString(data: self, encoding: String.Encoding.utf8.rawValue) as? String ?? ""
+        return String(data: self, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue)) ?? ""
     }
     
 }

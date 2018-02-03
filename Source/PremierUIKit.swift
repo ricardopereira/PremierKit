@@ -74,7 +74,7 @@ public extension UIFont {
     
     /// Size of text
     public func sizeOfString(_ string: String, constrainedToWidth width: CGFloat) -> CGSize {
-        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat(DBL_MAX)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
+        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
     }
 
 }
@@ -141,18 +141,18 @@ public extension ViewControllerPresentErrors {
 
 // MARK: ViewControllerPresentDialogs
 
-public protocol ViewControllerPresenter {
-    func presentViewController(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
+public protocol ViewControllerPresenter: class {
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
 }
 
 public protocol ViewControllerPresentDialogs: ViewControllerPresenter {
-    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertActionStyle?, completionAccepted: ()->Void)
+    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertActionStyle?, completionAccepted: @escaping () -> Void)
     func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
 public extension ViewControllerPresentDialogs {
 
-    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertActionStyle? = nil, completionAccepted: @escaping ()->Void) {
+    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertActionStyle? = nil, completionAccepted: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: acceptButtonTitle ?? "OK", style: acceptButtonStyle ?? .default) { action in
             completionAccepted()
@@ -160,14 +160,14 @@ public extension ViewControllerPresentDialogs {
         alertController.addAction(okAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     public func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
@@ -453,7 +453,7 @@ public extension ViewControllerPresentDialogs {
 
     public func showPicker<T: CustomStringConvertible>(_ list: [T], completion: @escaping ((Int?) -> Void)) {
         let pickerViewController = PickerViewController(list: list)
-        presentViewController(pickerViewController, animated: true, completion: {
+        present(pickerViewController, animated: true, completion: {
             completion(pickerViewController.selectedRow)
         })
     }
@@ -655,6 +655,8 @@ extension URLError.Code: CustomStringConvertible {
             return "Cannot decode content data"
         case .cannotParseResponse:
             return "Cannot parse response"
+        case .appTransportSecurityRequiresSecureConnection:
+            return "App transport security requires secure connection"
         case .fileDoesNotExist:
             return "File does not exist"
         case .fileIsDirectory:
@@ -701,6 +703,14 @@ extension URLError.Code: CustomStringConvertible {
             return "Data not allowed"
         case .requestBodyStreamExhausted:
             return "Request body stream exhausted"
+        case .dataLengthExceedsMaximum:
+            return "Data length exceeds maximum"
+        case .backgroundSessionRequiresSharedContainer:
+            return "Background session requires shared container"
+        case .backgroundSessionInUseByAnotherProcess:
+            return "Background session in use by another process"
+        case .backgroundSessionWasDisconnected:
+            return "Background session was disconnected"
         }
     }
 
