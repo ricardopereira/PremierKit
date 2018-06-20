@@ -74,7 +74,7 @@ public extension UIFont {
     
     /// Size of text
     public func sizeOfString(_ string: String, constrainedToWidth width: CGFloat) -> CGSize {
-        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
+        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self], context: nil).size
     }
 
 }
@@ -228,7 +228,7 @@ public extension ViewControllerPresentScroll where Self: UIViewController {
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self,
             action: handleContainerTapGestureSelector))
         // FIXME: should be recursive!
-        containerView.subviews.flatMap{ $0 as? UITextField }.forEach { field in
+        containerView.subviews.compactMap{ $0 as? UITextField }.forEach { field in
             field.delegate = self
         }
     }
@@ -248,15 +248,15 @@ public extension UIScrollView {
         scrollIndicatorInsets.bottom += adjustmentHeight
     }
 
-    internal func keyboardWillShow(_ sender: Notification) {
+    @objc internal func keyboardWillShow(_ sender: Notification) {
         adjustInsetForKeyboardShow(true, notification: sender)
     }
 
-    internal func keyboardWillHide(_ sender: Notification) {
+    @objc internal func keyboardWillHide(_ sender: Notification) {
         adjustInsetForKeyboardShow(false, notification: sender)
     }
 
-    internal func keyboardWillChangeFrame(_ sender: Notification) {
+    @objc internal func keyboardWillChangeFrame(_ sender: Notification) {
         contentInset.bottom = 0
         scrollIndicatorInsets.bottom = 0
     }
@@ -322,7 +322,7 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
 
-        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 20)])
+        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)])
         buttonCancel.setAttributedTitle(attributedString, for: UIControlState())
         buttonCancel.layer.masksToBounds = true
         buttonCancel.layer.cornerRadius = 14.0
@@ -421,7 +421,7 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
         self.dismiss(animated: true, completion: nil)
     }
 
-    internal func didTouchCancel(_ sender: AnyObject) {
+    @objc internal func didTouchCancel(_ sender: AnyObject) {
         UIView.animate(withDuration: 0.3, animations: {
             self.initialConstraint?.constant = 300
             self.pickerView.layoutIfNeeded()

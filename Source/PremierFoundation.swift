@@ -57,7 +57,7 @@ public extension String {
         if index > length - 1 {
             return ""
         }
-        return substring(to: self.index(self.startIndex, offsetBy: index))
+        return String(self[..<self.index(self.startIndex, offsetBy: index)])
     }
 
     /// Get a substring from index
@@ -65,7 +65,7 @@ public extension String {
         if index > length - 1 {
             return ""
         }
-        return substring(from: self.index(self.startIndex, offsetBy: index))
+        return String(self[self.index(self.startIndex, offsetBy: index)...])
     }
 
 }
@@ -135,9 +135,9 @@ public extension NSRegularExpression {
         let regex = try! NSRegularExpression(pattern: pattern, options: options)
         let range = NSMakeRange(0, value.lengthOfBytes(using: String.Encoding.utf8))
         let result = regex.firstMatch(in: value, options: [], range: range)
-        guard let textRange = result?.rangeAt(0) else { return nil }
+        guard let textRange = result?.range(at: 0) else { return nil }
         let convertedRange =  value.index(value.startIndex, offsetBy: textRange.location)..<value.index(value.startIndex, offsetBy: textRange.location+textRange.length)
-        return value.substring(with: convertedRange)
+        return String(value[convertedRange])
     }
     
 }
