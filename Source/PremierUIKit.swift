@@ -663,6 +663,8 @@ extension URLError.Code: CustomStringConvertible {
             return "File is directory"
         case .noPermissionsToReadFile:
             return "No permissions to read file"
+        case .dataLengthExceedsMaximum:
+            return "Data length exceeds maximum"
         case .secureConnectionFailed:
             return "Secure connection failed"
         case .serverCertificateHasBadDate:
@@ -703,14 +705,14 @@ extension URLError.Code: CustomStringConvertible {
             return "Data not allowed"
         case .requestBodyStreamExhausted:
             return "Request body stream exhausted"
-        case .dataLengthExceedsMaximum:
-            return "Data length exceeds maximum"
         case .backgroundSessionRequiresSharedContainer:
             return "Background session requires shared container"
         case .backgroundSessionInUseByAnotherProcess:
             return "Background session in use by another process"
         case .backgroundSessionWasDisconnected:
             return "Background session was disconnected"
+        default:
+            return "Unknown"
         }
     }
 
