@@ -19,7 +19,7 @@ public func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictiona
 }
 
 // Unite/Combine mutable dictionaries
-public func += <K,V> (inout left: Dictionary<K,V>, right: Dictionary<K,V>?) {
+public func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
     guard let right = right else { return }
     right.forEach { key, value in
         left.updateValue(value, forKey: key)

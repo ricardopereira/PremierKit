@@ -8,14 +8,10 @@
 
 import Foundation
 
-public func delay(seconds: NSTimeInterval, closure: ()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(seconds * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(),
-        closure
+public func delay(_ seconds: TimeInterval, closure: @escaping ()->()) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
+        execute: closure
     )
 }
 
@@ -24,47 +20,39 @@ public func delay(seconds: NSTimeInterval, closure: ()->()) {
 
 public struct FileManager {
 
-    private init() {}
+    fileprivate init() {}
 
-    public static func directoryExists(manager: NSFileManager = NSFileManager.defaultManager(), directoryURL: NSURL) -> Bool {
+    public static func directoryExists(_ manager: Foundation.FileManager = Foundation.FileManager.default, directoryURL: URL) -> Bool {
         return fileExists(manager, fileURL: directoryURL)
     }
 
-    public static func createDirectory(manager: NSFileManager = NSFileManager.defaultManager(), directoryURL: NSURL) -> Bool {
-        if let path = directoryURL.path, _ = try? manager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil) {
+    public static func createDirectory(_ manager: Foundation.FileManager = Foundation.FileManager.default, directoryURL: URL) -> Bool {
+        if let _ = try? manager.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil) {
             return true
         }
         return false
     }
 
-    public static func fileExists(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL) -> Bool {
-        if let path = fileURL.path {
-            return manager.fileExistsAtPath(path)
-        }
-        return false
+    public static func fileExists(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL) -> Bool {
+        return manager.fileExists(atPath: fileURL.path)
     }
 
-    public static func createFile(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL, data: NSData) -> Bool {
-        guard let directoryPath = fileURL.URLByDeletingLastPathComponent?.path else {
+    public static func createFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL, data: Data) -> Bool {
+        let directoryPath = fileURL.deletingLastPathComponent().path
+
+        guard let _ = try? manager.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil) else {
             return false
         }
 
-        guard let _ = try? manager.createDirectoryAtPath(directoryPath, withIntermediateDirectories: true, attributes: nil) else {
-            return false
-        }
-
-        guard let filePath = fileURL.path else {
-            return false
-        }
-        return manager.createFileAtPath(filePath, contents: data, attributes: nil)
+        return manager.createFile(atPath: fileURL.path, contents: data, attributes: nil)
     }
 
-    public static func removeFile(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL?) -> Bool {
+    public static func removeFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL?) -> Bool {
         guard let fileURL = fileURL else {
             return true
         }
         do {
-            try manager.removeItemAtURL(fileURL)
+            try manager.removeItem(at: fileURL)
             return true
         }
         catch {
@@ -72,48 +60,46 @@ public struct FileManager {
         }
     }
 
-    public static func removeDirectory(manager: NSFileManager = NSFileManager.defaultManager(), directoryURL: NSURL) -> Bool {
+    public static func removeDirectory(_ manager: Foundation.FileManager = Foundation.FileManager.default, directoryURL: URL) -> Bool {
         return removeFile(fileURL: directoryURL)
     }
 
-    public static func renameFile(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL, name: String) -> NSURL? {
-        if let destinationURL = fileURL.URLByDeletingLastPathComponent where moveFile(manager, sourceURL: fileURL, targetURL: destinationURL.URLByAppendingPathComponent(name)) {
-            return destinationURL.URLByAppendingPathComponent(name)
+    public static func renameFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL, name: String) -> URL? {
+        let destinationURL = fileURL.deletingLastPathComponent()
+        if moveFile(manager, sourceURL: fileURL, targetURL: destinationURL.appendingPathComponent(name)) {
+            return destinationURL.appendingPathComponent(name)
         }
         return nil
     }
 
-    public static func moveFile(manager: NSFileManager = NSFileManager.defaultManager(), sourceURL: NSURL, targetURL: NSURL) -> Bool {
-        if let _ = try? manager.moveItemAtURL(sourceURL, toURL: targetURL) {
+    public static func moveFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, sourceURL: URL, targetURL: URL?) -> Bool {
+        guard let targetURL = targetURL else {
+            return false
+        }
+        if let _ = try? manager.moveItem(at: sourceURL, to: targetURL) {
             return true
         }
         return false
     }
 
     public typealias FileName = String
-    public static func contentsOfDirectory(manager: NSFileManager = NSFileManager.defaultManager(), directoryURL: NSURL) -> [FileName] {
-        guard let directoryPath = directoryURL.path else {
-            return []
-        }
-        return (try? manager.contentsOfDirectoryAtPath(directoryPath)) ?? []
+    public static func contentsOfDirectory(_ manager: Foundation.FileManager = Foundation.FileManager.default, directoryURL: URL) -> [FileName] {
+        return (try? manager.contentsOfDirectory(atPath: directoryURL.path)) ?? []
     }
 
-    public static func contentsOfFile(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL) -> NSData? {
-        guard let filePath = fileURL.path else {
-            return nil
-        }
-        return manager.contentsAtPath(filePath)
+    public static func contentsOfFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL) -> Data? {
+        return manager.contents(atPath: fileURL.path)
     }
 
-    public static func attributesOfFile(manager: NSFileManager = NSFileManager.defaultManager(), fileURL: NSURL?) -> FileAttributes? {
+    public static func attributesOfFile(_ manager: Foundation.FileManager = Foundation.FileManager.default, fileURL: URL?) -> FileAttributes? {
         guard let filePath = fileURL?.path else {
             return nil
         }
-        let attributes = (try? manager.attributesOfItemAtPath(filePath)) ?? [:]
+        let attributes = (try? manager.attributesOfItem(atPath: filePath)) ?? [:]
         return FileAttributes(
-            size: attributes[NSFileSize] as? Int ?? 0,
-            modificationDate: attributes[NSFileModificationDate] as? NSDate ?? NSDate(),
-            creationDate: attributes[NSFileCreationDate] as? NSDate ?? NSDate()
+            size: attributes[FileAttributeKey.size] as? Int ?? 0,
+            modificationDate: attributes[FileAttributeKey.modificationDate] as? Date ?? Date(),
+            creationDate: attributes[FileAttributeKey.creationDate] as? Date ?? Date()
         )
     }
 
@@ -121,6 +107,6 @@ public struct FileManager {
 
 public struct FileAttributes {
     let size: Int
-    let modificationDate: NSDate
-    let creationDate: NSDate
+    let modificationDate: Date
+    let creationDate: Date
 }

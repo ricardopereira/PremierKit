@@ -12,7 +12,7 @@ public extension UIView {
 
     /// Find the first responder
     public func getFirstResponder() -> UIView? {
-        if self.isFirstResponder() {
+        if self.isFirstResponder {
             return self
         }
         for subview in subviews {
@@ -24,22 +24,22 @@ public extension UIView {
     }
 
     /// Add a mask by rounding corners
-    public func setCustomCornerRadius(cornerRadius: CGFloat, corners: UIRectCorner) {
+    public func setCustomCornerRadius(_ cornerRadius: CGFloat, corners: UIRectCorner) {
         layer.mask = { layer in
             let path = UIBezierPath(roundedRect:self.bounds, byRoundingCorners:corners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
-            layer.path = path.CGPath
+            layer.path = path.cgPath
             return layer
         }(CAShapeLayer())
     }
 
     /// TODO
-    public func activateConstraints(view: UIView) {
+    public func activateConstraints(_ view: UIView) {
         if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activateConstraints([
-                self.topAnchor.constraintEqualToAnchor(view.topAnchor),
-                self.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
-                self.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-                self.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor),
+            NSLayoutConstraint.activate([
+                self.topAnchor.constraint(equalTo: view.topAnchor),
+                self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                self.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
         } else {
             // Fallback on earlier versions
@@ -54,7 +54,7 @@ public extension UIWindow {
         return UIWindow.getVisibleViewControllerFrom(self.rootViewController)
     }
 
-    public static func getVisibleViewControllerFrom(viewController: UIViewController?) -> UIViewController? {
+    public static func getVisibleViewControllerFrom(_ viewController: UIViewController?) -> UIViewController? {
         if let navigationController = viewController as? UINavigationController {
             return UIWindow.getVisibleViewControllerFrom(navigationController.visibleViewController)
         } else if let tabBarController = viewController as? UITabBarController {
@@ -73,8 +73,8 @@ public extension UIWindow {
 public extension UIFont {
     
     /// Size of text
-    public func sizeOfString(string: String, constrainedToWidth width: CGFloat) -> CGSize {
-        return (string as NSString).boundingRectWithSize(CGSize(width: width, height: CGFloat(DBL_MAX)), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
+    public func sizeOfString(_ string: String, constrainedToWidth width: CGFloat) -> CGSize {
+        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self], context: nil).size
     }
 
 }
@@ -97,7 +97,7 @@ extension UILabel: TextTrimmer { }
 
 public extension UIScrollView {
 
-    public func scrollToBottom(animated: Bool = false) {
+    public func scrollToBottom(_ animated: Bool = false) {
         let offsetY = self.contentSize.height - self.frame.size.height
         self.setContentOffset(CGPoint(x: 0, y: max(0, offsetY)), animated: animated)
     }
@@ -123,15 +123,15 @@ public protocol ViewControllerPresentContent {
 // MARK: ViewControllerPresentErrors
 
 public protocol ViewControllerPresentErrors {
-    func presentViewController(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
-    func showError(message: String, handler: ((UIAlertAction) -> Void)?)
+    func presentViewController(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
+    func showError(_ message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
 public extension ViewControllerPresentErrors {
 
-    public func showError(message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Destructive, handler: handler)
+    public func showError(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: handler)
         alertController.addAction(okAction)
         presentViewController(alertController, animated: true, completion: nil)
     }
@@ -141,33 +141,33 @@ public extension ViewControllerPresentErrors {
 
 // MARK: ViewControllerPresentDialogs
 
-public protocol ViewControllerPresenter {
-    func presentViewController(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
+public protocol ViewControllerPresenter: class {
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
 }
 
 public protocol ViewControllerPresentDialogs: ViewControllerPresenter {
-    func showConfimationDialog(title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertActionStyle?, completionAccepted: ()->Void)
-    func showMessage(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
+    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertActionStyle?, completionAccepted: @escaping () -> Void)
+    func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
 public extension ViewControllerPresentDialogs {
 
-    public func showConfimationDialog(title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertActionStyle? = nil, completionAccepted: ()->Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: acceptButtonTitle ?? "OK", style: acceptButtonStyle ?? .Default) { action in
+    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertActionStyle? = nil, completionAccepted: @escaping () -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: acceptButtonTitle ?? "OK", style: acceptButtonStyle ?? .default) { action in
             completionAccepted()
         }
         alertController.addAction(okAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
-    public func showMessage(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: handler)
+    public func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
@@ -177,7 +177,7 @@ public extension ViewControllerPresentDialogs {
 
 public protocol ViewControllerPresentKeyboard {
     func hideKeyboard()
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
 }
 
 public extension ViewControllerPresentKeyboard where Self: UIViewController {
@@ -192,18 +192,18 @@ public extension ViewControllerPresentKeyboard where Self: UIViewController {
 // MARK: ViewControllerFieldValidator
 
 public protocol ViewControllerFieldValidator {
-    func verifyContent() -> Bool
+    @discardableResult func verifyContent() -> Bool
     func validateContent()
 }
 
 public extension ViewControllerFieldValidator {
 
-    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         verifyContent()
         return true
     }
 
-    public func textFieldDidEndEditing(textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         validateContent()
     }
 
@@ -237,10 +237,10 @@ public extension ViewControllerPresentScroll where Self: UIViewController {
 
 public extension UIScrollView {
 
-    private func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
+    fileprivate func adjustInsetForKeyboardShow(_ show: Bool, notification: Notification) {
         guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = value.CGRectValue()
-        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 20) * (show ? 1 : -1)
+        let keyboardFrame = value.cgRectValue
+        let adjustmentHeight = (keyboardFrame.height + 20) * (show ? 1 : -1)
         if contentInset.bottom == 0 && adjustmentHeight < 0 {
             return
         }
@@ -248,36 +248,36 @@ public extension UIScrollView {
         scrollIndicatorInsets.bottom += adjustmentHeight
     }
 
-    internal func keyboardWillShow(sender: NSNotification) {
+    internal func keyboardWillShow(_ sender: Notification) {
         adjustInsetForKeyboardShow(true, notification: sender)
     }
 
-    internal func keyboardWillHide(sender: NSNotification) {
+    internal func keyboardWillHide(_ sender: Notification) {
         adjustInsetForKeyboardShow(false, notification: sender)
     }
 
-    internal func keyboardWillChangeFrame(sender: NSNotification) {
+    internal func keyboardWillChangeFrame(_ sender: Notification) {
         contentInset.bottom = 0
         scrollIndicatorInsets.bottom = 0
     }
 
     public func setupKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillShow(_:)),
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillHide(_:)),
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillChangeFrame(_:)),
-            name: UIKeyboardWillChangeFrameNotification,
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
             object: nil
         )
     }
@@ -288,25 +288,25 @@ public extension UIScrollView {
 // MARK: ViewControllerPresentPicker
 
 public protocol ViewControllerPresentPicker: ViewControllerPresenter {
-    func showPicker<T: CustomStringConvertible>(list: [T], completion: ((Int?) -> Void))
+    func showPicker<T: CustomStringConvertible>(_ list: [T], completion: ((Int?) -> Void))
 }
 
-public class PickerViewController<T: CustomStringConvertible>: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+open class PickerViewController<T: CustomStringConvertible>: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     let list: [T]
 
-    public var selectedRow: Int {
-        return pickerView.selectedRowInComponent(0)
+    open var selectedRow: Int {
+        return pickerView.selectedRow(inComponent: 0)
     }
 
-    private let titleLabel = UILabel()
-    private let pickerView = UIPickerView()
+    fileprivate let titleLabel = UILabel()
+    fileprivate let pickerView = UIPickerView()
     // TODO: missing Done button
-    private let buttonCancel = UIButton(type: .System)
-    private var initialConstraint: NSLayoutConstraint?
+    fileprivate let buttonCancel = UIButton(type: .system)
+    fileprivate var initialConstraint: NSLayoutConstraint?
 
     @available(iOS, unavailable)
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.list = []
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -319,131 +319,131 @@ public class PickerViewController<T: CustomStringConvertible>: UIViewController,
         self.list = list
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
-        modalTransitionStyle = .CrossDissolve
-        modalPresentationStyle = .OverCurrentContext
+        modalTransitionStyle = .crossDissolve
+        modalPresentationStyle = .overCurrentContext
 
-        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(20)])
-        buttonCancel.setAttributedTitle(attributedString, forState: .Normal)
+        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 20)])
+        buttonCancel.setAttributedTitle(attributedString, for: UIControlState())
         buttonCancel.layer.masksToBounds = true
         buttonCancel.layer.cornerRadius = 14.0
-        buttonCancel.backgroundColor = .whiteColor()
+        buttonCancel.backgroundColor = .white
 
         if #available(iOS 9.0, *) {
-            initialConstraint = buttonCancel.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: -10)
+            initialConstraint = buttonCancel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
         } else {
-            initialConstraint = NSLayoutConstraint(item: buttonCancel, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
+            initialConstraint = NSLayoutConstraint(item: buttonCancel, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -10)
         }
         buttonCancel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonCancel)
         if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activateConstraints([
-                buttonCancel.heightAnchor.constraintEqualToConstant(56),
-                buttonCancel.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant: 10),
-                buttonCancel.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: -10),
+            NSLayoutConstraint.activate([
+                buttonCancel.heightAnchor.constraint(equalToConstant: 56),
+                buttonCancel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10),
+                buttonCancel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10),
                 self.initialConstraint!,
             ])
         } else {
-            NSLayoutConstraint.activateConstraints([
-                NSLayoutConstraint(item: buttonCancel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 56),
-                NSLayoutConstraint(item: buttonCancel, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1.0, constant: 10),
-                NSLayoutConstraint(item: buttonCancel, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .Trailing, multiplier: 1.0, constant: -10),
+            NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: buttonCancel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 56),
+                NSLayoutConstraint(item: buttonCancel, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 10),
+                NSLayoutConstraint(item: buttonCancel, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: -10),
                 self.initialConstraint!,
             ])
         }
-        buttonCancel.addTarget(self, action: #selector(didTouchCancel), forControlEvents: .TouchUpInside)
+        buttonCancel.addTarget(self, action: #selector(didTouchCancel), for: .touchUpInside)
 
         pickerView.layer.masksToBounds = true
         pickerView.layer.cornerRadius = 14.0
-        pickerView.backgroundColor = .whiteColor()
+        pickerView.backgroundColor = .white
         pickerView.dataSource = self
         pickerView.delegate = self
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerView)
         if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activateConstraints([
-                pickerView.heightAnchor.constraintEqualToConstant(180),
-                pickerView.leadingAnchor.constraintEqualToAnchor(buttonCancel.leadingAnchor),
-                pickerView.trailingAnchor.constraintEqualToAnchor(buttonCancel.trailingAnchor),
-                pickerView.bottomAnchor.constraintEqualToAnchor(buttonCancel.topAnchor, constant: -8),
+            NSLayoutConstraint.activate([
+                pickerView.heightAnchor.constraint(equalToConstant: 180),
+                pickerView.leadingAnchor.constraint(equalTo: buttonCancel.leadingAnchor),
+                pickerView.trailingAnchor.constraint(equalTo: buttonCancel.trailingAnchor),
+                pickerView.bottomAnchor.constraint(equalTo: buttonCancel.topAnchor, constant: -8),
             ])
         } else {
-            NSLayoutConstraint.activateConstraints([
-                NSLayoutConstraint(item: pickerView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 180),
-                NSLayoutConstraint(item: pickerView, attribute: .Leading, relatedBy: .Equal, toItem: buttonCancel, attribute: .Leading, multiplier: 1.0, constant: 0),
-                NSLayoutConstraint(item: pickerView, attribute: .Trailing, relatedBy: .Equal, toItem: buttonCancel, attribute: .Trailing, multiplier: 1.0, constant: 0),
-                NSLayoutConstraint(item: pickerView, attribute: .Bottom, relatedBy: .Equal, toItem: buttonCancel, attribute: .Top, multiplier: 1.0, constant: -8),
+            NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: pickerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 180),
+                NSLayoutConstraint(item: pickerView, attribute: .leading, relatedBy: .equal, toItem: buttonCancel, attribute: .leading, multiplier: 1.0, constant: 0),
+                NSLayoutConstraint(item: pickerView, attribute: .trailing, relatedBy: .equal, toItem: buttonCancel, attribute: .trailing, multiplier: 1.0, constant: 0),
+                NSLayoutConstraint(item: pickerView, attribute: .bottom, relatedBy: .equal, toItem: buttonCancel, attribute: .top, multiplier: 1.0, constant: -8),
             ])
         }
 
-        titleLabel.hidden = true
+        titleLabel.isHidden = true
         titleLabel.text = "Test"
-        titleLabel.textColor = .grayColor()
-        titleLabel.textAlignment = .Center
-        titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        titleLabel.backgroundColor = .whiteColor()
+        titleLabel.textColor = .gray
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        titleLabel.backgroundColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
         if #available(iOS 9.0, *) {
-            NSLayoutConstraint.activateConstraints([
-                titleLabel.heightAnchor.constraintEqualToConstant(56),
-                titleLabel.leadingAnchor.constraintEqualToAnchor(pickerView.leadingAnchor),
-                titleLabel.trailingAnchor.constraintEqualToAnchor(pickerView.trailingAnchor),
-                titleLabel.bottomAnchor.constraintEqualToAnchor(pickerView.topAnchor),
+            NSLayoutConstraint.activate([
+                titleLabel.heightAnchor.constraint(equalToConstant: 56),
+                titleLabel.leadingAnchor.constraint(equalTo: pickerView.leadingAnchor),
+                titleLabel.trailingAnchor.constraint(equalTo: pickerView.trailingAnchor),
+                titleLabel.bottomAnchor.constraint(equalTo: pickerView.topAnchor),
             ])
         } else {
-            NSLayoutConstraint.activateConstraints([
-                NSLayoutConstraint(item: titleLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 56),
-                NSLayoutConstraint(item: titleLabel, attribute: .Leading, relatedBy: .Equal, toItem: pickerView, attribute: .Leading, multiplier: 1.0, constant: 0),
-                NSLayoutConstraint(item: titleLabel, attribute: .Trailing, relatedBy: .Equal, toItem: pickerView, attribute: .Trailing, multiplier: 1.0, constant: 0),
-                NSLayoutConstraint(item: titleLabel, attribute: .Bottom, relatedBy: .Equal, toItem: pickerView, attribute: .Top, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 56),
+                NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: pickerView, attribute: .leading, multiplier: 1.0, constant: 0),
+                NSLayoutConstraint(item: titleLabel, attribute: .trailing, relatedBy: .equal, toItem: pickerView, attribute: .trailing, multiplier: 1.0, constant: 0),
+                NSLayoutConstraint(item: titleLabel, attribute: .bottom, relatedBy: .equal, toItem: pickerView, attribute: .top, multiplier: 1.0, constant: 0),
             ])
         }
     }
 
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initialConstraint?.constant = 300
         pickerView.layoutIfNeeded()
         buttonCancel.layoutIfNeeded()
     }
 
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animateWithDuration(0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.CurveEaseOut], animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [.curveEaseOut], animations: {
             self.initialConstraint?.constant = -10
             self.pickerView.layoutIfNeeded()
             self.buttonCancel.layoutIfNeeded()
             }, completion: nil)
     }
 
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-        self.dismissViewControllerAnimated(true, completion: nil)
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.dismiss(animated: true, completion: nil)
     }
 
-    internal func didTouchCancel(sender: AnyObject) {
-        UIView.animateWithDuration(0.3, animations: {
+    internal func didTouchCancel(_ sender: AnyObject) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.initialConstraint?.constant = 300
             self.pickerView.layoutIfNeeded()
             self.buttonCancel.layoutIfNeeded()
             }, completion: { _ in
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
         })
     }
 
     // Delegate
 
-    public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    open func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return list[row].description
     }
 
     // Datasource
 
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    open func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    open func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return list.count
     }
 
@@ -451,9 +451,9 @@ public class PickerViewController<T: CustomStringConvertible>: UIViewController,
 
 public extension ViewControllerPresentDialogs {
 
-    public func showPicker<T: CustomStringConvertible>(list: [T], completion: ((Int?) -> Void)) {
+    public func showPicker<T: CustomStringConvertible>(_ list: [T], completion: @escaping ((Int?) -> Void)) {
         let pickerViewController = PickerViewController(list: list)
-        presentViewController(pickerViewController, animated: true, completion: {
+        present(pickerViewController, animated: true, completion: {
             completion(pickerViewController.selectedRow)
         })
     }
@@ -463,12 +463,12 @@ public extension ViewControllerPresentDialogs {
 
 // MARK: UIFieldSeparator
 
-public class UIFieldSeparator: UIView {
+open class UIFieldSeparator: UIView {
 
-    private var originalColor: UIColor = .blackColor()
+    fileprivate var originalColor: UIColor = .black
 
-    private lazy var errorLabel = UILabel()
-    public var error: String? {
+    fileprivate lazy var errorLabel = UILabel()
+    open var error: String? {
         didSet {
             guard let errorMessage = error else {
                 self.backgroundColor = originalColor
@@ -478,11 +478,11 @@ public class UIFieldSeparator: UIView {
             if errorMessage.isEmpty == false && errorLabel.superview == nil {
                 addSubview(errorLabel)
                 errorLabel.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 18)
-                errorLabel.textAlignment = .Right
-                self.originalColor = backgroundColor ?? .blackColor()
-                self.backgroundColor = .redColor()
+                errorLabel.textAlignment = .right
+                self.originalColor = backgroundColor ?? .black
+                self.backgroundColor = .red
                 errorLabel.textColor = self.backgroundColor
-                errorLabel.font = errorLabel.font.fontWithSize(10)
+                errorLabel.font = errorLabel.font.withSize(10)
                 setErrorMessageWithAnimation(errorMessage)
             }
             else if errorMessage.isEmpty == false {
@@ -495,7 +495,7 @@ public class UIFieldSeparator: UIView {
         }
     }
 
-    private func setErrorMessageWithAnimation(message: String) {
+    fileprivate func setErrorMessageWithAnimation(_ message: String) {
         if self.errorLabel.trimmedText == message {
             return
         }
@@ -504,14 +504,14 @@ public class UIFieldSeparator: UIView {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.errorLabel.text = message
-            self.errorLabel.layer.addAnimation(fadeTransition, forKey: kCATransition)
+            self.errorLabel.layer.add(fadeTransition, forKey: kCATransition)
         }
         errorLabel.text = ""
-        errorLabel.layer.addAnimation(fadeTransition, forKey: kCATransition)
+        errorLabel.layer.add(fadeTransition, forKey: kCATransition)
         CATransaction.commit()
     }
 
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         errorLabel.frame = CGRect(x: 0, y: self.frame.size.height, width: self.frame.size.width, height: 18)
     }
@@ -523,40 +523,40 @@ public class UIFieldSeparator: UIView {
 
 public extension UIViewController {
 
-    public func backToRootViewController(animated: Bool = true) {
+    public func backToRootViewController(_ animated: Bool = true) {
         if let navigationController = self.navigationController {
-            navigationController.popToRootViewControllerAnimated(true)
+            navigationController.popToRootViewController(animated: true)
         }
         else {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
 
-    public func smoothlyDeselectRows(tableView tableView: UITableView?) {
+    public func smoothlyDeselectRows(tableView: UITableView?) {
         // Get the initially selected index paths, if any
         let selectedIndexPaths = tableView?.indexPathsForSelectedRows ?? []
 
         // Grab the transition coordinator responsible for the current transition
-        if let coordinator = transitionCoordinator() {
+        if let coordinator = transitionCoordinator {
             // Animate alongside the master view controller's view
-            coordinator.animateAlongsideTransitionInView(parentViewController?.view, animation: { context in
+            coordinator.animateAlongsideTransition(in: parent?.view, animation: { context in
                 // Deselect the cells, with animations enabled if this is an animated transition
                 selectedIndexPaths.forEach {
-                    tableView?.deselectRowAtIndexPath($0, animated: context.isAnimated())
+                    tableView?.deselectRow(at: $0, animated: context.isAnimated)
                 }
                 }, completion: { context in
                     // If the transition was cancel, reselect the rows that were selected before,
                     // so they are still selected the next time the same animation is triggered
-                    if context.isCancelled() {
+                    if context.isCancelled {
                         selectedIndexPaths.forEach {
-                            tableView?.selectRowAtIndexPath($0, animated: false, scrollPosition: .None)
+                            tableView?.selectRow(at: $0, animated: false, scrollPosition: .none)
                         }
                     }
             })
         }
         else { // If this isn't a transition coordinator, just deselect the rows without animating
             selectedIndexPaths.forEach {
-                tableView?.deselectRowAtIndexPath($0, animated: false)
+                tableView?.deselectRow(at: $0, animated: false)
             }
         }
     }
@@ -588,22 +588,21 @@ public func ==(left: CGSize, right: CGSize) -> Bool {
 
 
 // MARK: Custom operator `==?` to compare AnyObjects
-
-infix operator ==? { associativity none precedence 160 }
+infix operator ==? : ComparisonPrecedence
 public func ==?(lhs: AnyObject?, rhs: AnyObject?) -> Bool {
-    if let a = lhs as? Int, b = rhs as? Int {
+    if let a = lhs as? Int, let b = rhs as? Int {
         return a == b
     }
-    else if let a = lhs as? Float, b = rhs as? Float {
+    else if let a = lhs as? Float, let b = rhs as? Float {
         return a == b
     }
-    else if let a = lhs as? Double, b = rhs as? Double {
+    else if let a = lhs as? Double, let b = rhs as? Double {
         return a == b
     }
-    else if let a = lhs as? String, b = rhs as? String {
+    else if let a = lhs as? String, let b = rhs as? String {
         return a == b
     }
-    else if let a = lhs as? Bool, b = rhs as? Bool {
+    else if let a = lhs as? Bool, let b = rhs as? Bool {
         return a == b
     }
     return false
@@ -612,101 +611,105 @@ public func ==?(lhs: AnyObject?, rhs: AnyObject?) -> Bool {
 
 // MARK: NSURLError extension
 
-extension NSURLError: CustomStringConvertible {
+extension URLError.Code: CustomStringConvertible {
 
     public var description: String {
         switch self {
-        case .Unknown:
+        case .unknown:
             return "Unknown"
-        case .Cancelled:
+        case .cancelled:
             return "Cancelled"
-        case .BadURL:
+        case .badURL:
             return "Bad URL"
-        case .TimedOut:
+        case .timedOut:
             return "Timed out"
-        case .UnsupportedURL:
+        case .unsupportedURL:
             return "Unsupported URL"
-        case .CannotFindHost:
+        case .cannotFindHost:
             return "Cannot find host"
-        case .CannotConnectToHost:
+        case .cannotConnectToHost:
             return "Cannot connect to host"
-        case .NetworkConnectionLost:
+        case .networkConnectionLost:
             return "Network connection lost"
-        case .DNSLookupFailed:
+        case .dnsLookupFailed:
             return "DNS lookup failed"
-        case .HTTPTooManyRedirects:
+        case .httpTooManyRedirects:
             return "HTTP too many redirects"
-        case .ResourceUnavailable:
+        case .resourceUnavailable:
             return "Resource unavailable"
-        case .NotConnectedToInternet:
+        case .notConnectedToInternet:
             return "No active internet connection"
-        case .RedirectToNonExistentLocation:
+        case .redirectToNonExistentLocation:
             return "Redirect to non existent location"
-        case .BadServerResponse:
+        case .badServerResponse:
             return "Bad server response"
-        case .UserCancelledAuthentication:
+        case .userCancelledAuthentication:
             return "User cancelled authentication"
-        case .UserAuthenticationRequired:
+        case .userAuthenticationRequired:
             return "User authentication required"
-        case .ZeroByteResource:
+        case .zeroByteResource:
             return "Zero byte resource"
-        case .CannotDecodeRawData:
+        case .cannotDecodeRawData:
             return "Cannot decode raw data"
-        case .CannotDecodeContentData:
+        case .cannotDecodeContentData:
             return "Cannot decode content data"
-        case .CannotParseResponse:
+        case .cannotParseResponse:
             return "Cannot parse response"
-        case .FileDoesNotExist:
+        case .appTransportSecurityRequiresSecureConnection:
+            return "App transport security requires secure connection"
+        case .fileDoesNotExist:
             return "File does not exist"
-        case .FileIsDirectory:
+        case .fileIsDirectory:
             return "File is directory"
-        case .NoPermissionsToReadFile:
+        case .noPermissionsToReadFile:
             return "No permissions to read file"
-        case .SecureConnectionFailed:
+        case .secureConnectionFailed:
             return "Secure connection failed"
-        case .ServerCertificateHasBadDate:
+        case .serverCertificateHasBadDate:
             return "Server certificate has bad date"
-        case .ServerCertificateUntrusted:
+        case .serverCertificateUntrusted:
             return "Server certificate untrusted"
-        case .ServerCertificateHasUnknownRoot:
+        case .serverCertificateHasUnknownRoot:
             return "Server certificate has unknown root"
-        case .ServerCertificateNotYetValid:
+        case .serverCertificateNotYetValid:
             return "Server certificate not yet valid"
-        case .ClientCertificateRejected:
+        case .clientCertificateRejected:
             return "Client certificate rejected"
-        case .ClientCertificateRequired:
+        case .clientCertificateRequired:
             return "Client certificate required"
-        case .CannotLoadFromNetwork:
+        case .cannotLoadFromNetwork:
             return "Cannot load from network"
-        case CannotCreateFile:
+        case .cannotCreateFile:
             return "Cannot create file"
-        case CannotOpenFile:
+        case .cannotOpenFile:
             return "Cannot open file"
-        case CannotCloseFile:
+        case .cannotCloseFile:
             return "Cannot close file"
-        case CannotWriteToFile:
+        case .cannotWriteToFile:
             return "Cannot write to file"
-        case CannotRemoveFile:
+        case .cannotRemoveFile:
             return "Cannot remove file"
-        case CannotMoveFile:
+        case .cannotMoveFile:
             return "Cannot move file"
-        case .DownloadDecodingFailedMidStream:
+        case .downloadDecodingFailedMidStream:
             return "Download decoding failed mid stream"
-        case .DownloadDecodingFailedToComplete:
+        case .downloadDecodingFailedToComplete:
             return "Download decoding failed to complete"
-        case .InternationalRoamingOff:
+        case .internationalRoamingOff:
             return "International roaming off"
-        case .CallIsActive:
+        case .callIsActive:
             return "Call is active"
-        case .DataNotAllowed:
+        case .dataNotAllowed:
             return "Data not allowed"
-        case .RequestBodyStreamExhausted:
+        case .requestBodyStreamExhausted:
             return "Request body stream exhausted"
-        case .BackgroundSessionRequiresSharedContainer:
+        case .dataLengthExceedsMaximum:
+            return "Data length exceeds maximum"
+        case .backgroundSessionRequiresSharedContainer:
             return "Background session requires shared container"
-        case .BackgroundSessionInUseByAnotherProcess:
+        case .backgroundSessionInUseByAnotherProcess:
             return "Background session in use by another process"
-        case .BackgroundSessionWasDisconnected:
+        case .backgroundSessionWasDisconnected:
             return "Background session was disconnected"
         }
     }
@@ -720,17 +723,17 @@ extension UIGestureRecognizerState: CustomStringConvertible {
 
     public var description: String {
         switch self {
-        case .Began:
+        case .began:
             return "Began"
-        case .Cancelled:
+        case .cancelled:
             return "Cancelled"
-        case .Changed:
+        case .changed:
             return "Changed"
-        case .Ended:
+        case .ended:
             return "Ended"
-        case .Failed:
+        case .failed:
             return "Failed"
-        case .Possible:
+        case .possible:
             return "Possible"
         }
     }
