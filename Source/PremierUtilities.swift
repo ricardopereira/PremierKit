@@ -15,7 +15,7 @@ public func delay(_ seconds: TimeInterval, closure: @escaping ()->()) {
 
 // MARK: FileManager
 
-public struct FileManager {
+public final class PremierFileManager {
 
     fileprivate init() {}
 
