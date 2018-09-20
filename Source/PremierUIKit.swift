@@ -74,7 +74,7 @@ public extension UIFont {
     
     /// Size of text
     public func sizeOfString(_ string: String, constrainedToWidth width: CGFloat) -> CGSize {
-        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self], context: nil).size
+        return (string as NSString).boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: self], context: nil).size
     }
 
 }
@@ -146,13 +146,13 @@ public protocol ViewControllerPresenter: class {
 }
 
 public protocol ViewControllerPresentDialogs: ViewControllerPresenter {
-    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertActionStyle?, completionAccepted: @escaping () -> Void)
+    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertAction.Style?, completionAccepted: @escaping () -> Void)
     func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
 public extension ViewControllerPresentDialogs {
 
-    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertActionStyle? = nil, completionAccepted: @escaping () -> Void) {
+    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertAction.Style? = nil, completionAccepted: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: acceptButtonTitle ?? "OK", style: acceptButtonStyle ?? .default) { action in
             completionAccepted()
@@ -238,7 +238,7 @@ public extension ViewControllerPresentScroll where Self: UIViewController {
 public extension UIScrollView {
 
     fileprivate func adjustInsetForKeyboardShow(_ show: Bool, notification: Notification) {
-        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        guard let value = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
         let adjustmentHeight = (keyboardFrame.height + 20) * (show ? 1 : -1)
         if contentInset.bottom == 0 && adjustmentHeight < 0 {
@@ -265,19 +265,19 @@ public extension UIScrollView {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillShow(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillHide(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillChangeFrame(_:)),
-            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            name: UIResponder.keyboardWillChangeFrameNotification,
             object: nil
         )
     }
@@ -322,8 +322,8 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
 
-        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)])
-        buttonCancel.setAttributedTitle(attributedString, for: UIControlState())
+        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)])
+        buttonCancel.setAttributedTitle(attributedString, for: UIControl.State())
         buttonCancel.layer.masksToBounds = true
         buttonCancel.layer.cornerRadius = 14.0
         buttonCancel.backgroundColor = .white
@@ -379,7 +379,7 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
         titleLabel.text = "Test"
         titleLabel.textColor = .gray
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
         titleLabel.backgroundColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -721,7 +721,7 @@ extension URLError.Code: CustomStringConvertible {
 
 // MARK: UIGestureRecognizerState extension
 
-extension UIGestureRecognizerState: CustomStringConvertible {
+extension UIGestureRecognizer.State: CustomStringConvertible {
 
     public var description: String {
         switch self {

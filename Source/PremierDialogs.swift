@@ -36,7 +36,7 @@ public func askString(_ options: PremierDialogOptions, success: @escaping ([Stri
     alertController.addTextField { textField in
         textField.placeholder = options.placeholder
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { notification in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { notification in
             addStringAction.isEnabled = textField.text != ""
         }
     }
@@ -48,7 +48,7 @@ public func askString(_ options: PremierDialogOptions, success: @escaping ([Stri
                 // FIXME:
                 textField.keyboardType = .decimalPad
 
-                NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { notification in
+                NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { notification in
                     addStringAction.isEnabled = textField.text != ""
                 }
             }
