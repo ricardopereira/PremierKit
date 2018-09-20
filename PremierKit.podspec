@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PremierKit"
-  s.version          = "4.0.0"
+  s.version          = "5.0.0"
   s.summary          = "Base code for iOS apps"
   s.homepage         = "https://github.com/ricardopereira/PremierKit"
   s.license          = 'MIT'
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '9.0'
   s.requires_arc = true
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 
   s.source_files = 'PremierKit/*.{h}', 'Source/**/*.{h,swift}'
   s.frameworks = 'UIKit'

@@ -9,16 +9,13 @@
 import Foundation
 
 public func delay(_ seconds: TimeInterval, closure: @escaping ()->()) {
-    DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
-        execute: closure
-    )
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: closure)
 }
 
 
 // MARK: FileManager
 
-public struct FileManager {
+public final class PremierFileManager {
 
     fileprivate init() {}
 

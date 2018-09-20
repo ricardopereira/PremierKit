@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct NetworkActivityManager {
+public final class NetworkActivityManager {
 
     fileprivate static var activeActivities = [String:Int]()
 

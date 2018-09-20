@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7134EC7215389F100F0066E /* PremierKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134EC6215389F100F0066E /* PremierKitTests.swift */; };
+		D7134EC9215389F100F0066E /* PremierKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B51D121D56AB160023F072 /* PremierKit.framework */; };
+		D7134ED021538E3700F0066E /* Premier+URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134ECF21538E3700F0066E /* Premier+URLError.swift */; };
 		D7B51D161D56AB160023F072 /* PremierKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B51D151D56AB160023F072 /* PremierKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B51D271D56AFA80023F072 /* PremierCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D201D56AFA80023F072 /* PremierCollections.swift */; };
 		D7B51D281D56AFA80023F072 /* PremierDialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D211D56AFA80023F072 /* PremierDialogs.swift */; };
@@ -14,11 +17,24 @@
 		D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D241D56AFA80023F072 /* PremierTypes.swift */; };
 		D7B51D2C1D56AFA80023F072 /* PremierUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D251D56AFA80023F072 /* PremierUIKit.swift */; };
 		D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D261D56AFA80023F072 /* PremierUtilities.swift */; };
-		D7B51D331D56B2CA0023F072 /* PremierSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */; };
 		D7B51D351D56B2D20023F072 /* PremierNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D341D56B2D20023F072 /* PremierNetwork.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D7134ECA215389F100F0066E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7B51D091D56AB160023F072 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7B51D111D56AB160023F072;
+			remoteInfo = PremierKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		D7134EC4215389F100F0066E /* PremierKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PremierKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7134EC6215389F100F0066E /* PremierKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremierKitTests.swift; sourceTree = "<group>"; };
+		D7134EC8215389F100F0066E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7134ECF21538E3700F0066E /* Premier+URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+URLError.swift"; path = "Source/Premier+URLError.swift"; sourceTree = SOURCE_ROOT; };
 		D7B51D121D56AB160023F072 /* PremierKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PremierKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B51D151D56AB160023F072 /* PremierKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremierKit.h; sourceTree = "<group>"; };
 		D7B51D171D56AB160023F072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,11 +44,18 @@
 		D7B51D241D56AFA80023F072 /* PremierTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierTypes.swift; path = Source/PremierTypes.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D251D56AFA80023F072 /* PremierUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUIKit.swift; path = Source/PremierUIKit.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D261D56AFA80023F072 /* PremierUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUtilities.swift; path = Source/PremierUtilities.swift; sourceTree = SOURCE_ROOT; };
-		D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierSecurity.swift; path = Source/PremierSecurity.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D341D56B2D20023F072 /* PremierNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierNetwork.swift; path = Source/PremierNetwork.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D7134EC1215389F100F0066E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7134EC9215389F100F0066E /* PremierKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7B51D0E1D56AB160023F072 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,11 +66,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D7134EC5215389F100F0066E /* PremierKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7134EC6215389F100F0066E /* PremierKitTests.swift */,
+				D7134EC8215389F100F0066E /* Info.plist */,
+			);
+			path = PremierKitTests;
+			sourceTree = "<group>";
+		};
 		D7B51D081D56AB160023F072 = {
 			isa = PBXGroup;
 			children = (
 				D7B51D141D56AB160023F072 /* PremierKit */,
 				D7B51D1F1D56AF9C0023F072 /* Source */,
+				D7134EC5215389F100F0066E /* PremierKitTests */,
 				D7B51D131D56AB160023F072 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D7B51D121D56AB160023F072 /* PremierKit.framework */,
+				D7134EC4215389F100F0066E /* PremierKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +110,9 @@
 				D7B51D211D56AFA80023F072 /* PremierDialogs.swift */,
 				D7B51D221D56AFA80023F072 /* PremierFoundation.swift */,
 				D7B51D341D56B2D20023F072 /* PremierNetwork.swift */,
-				D7B51D321D56B2CA0023F072 /* PremierSecurity.swift */,
 				D7B51D241D56AFA80023F072 /* PremierTypes.swift */,
 				D7B51D251D56AFA80023F072 /* PremierUIKit.swift */,
+				D7134ECF21538E3700F0066E /* Premier+URLError.swift */,
 				D7B51D261D56AFA80023F072 /* PremierUtilities.swift */,
 			);
 			name = Source;
@@ -99,6 +133,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D7134EC3215389F100F0066E /* PremierKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7134ECC215389F100F0066E /* Build configuration list for PBXNativeTarget "PremierKitTests" */;
+			buildPhases = (
+				D7134EC0215389F100F0066E /* Sources */,
+				D7134EC1215389F100F0066E /* Frameworks */,
+				D7134EC2215389F100F0066E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7134ECB215389F100F0066E /* PBXTargetDependency */,
+			);
+			name = PremierKitTests;
+			productName = PremierKitTests;
+			productReference = D7134EC4215389F100F0066E /* PremierKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D7B51D111D56AB160023F072 /* PremierKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7B51D1A1D56AB160023F072 /* Build configuration list for PBXNativeTarget "PremierKit" */;
@@ -123,12 +175,17 @@
 		D7B51D091D56AB160023F072 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Ricardo Pereira";
 				TargetAttributes = {
+					D7134EC3215389F100F0066E = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+					};
 					D7B51D111D56AB160023F072 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -145,11 +202,19 @@
 			projectRoot = "";
 			targets = (
 				D7B51D111D56AB160023F072 /* PremierKit */,
+				D7134EC3215389F100F0066E /* PremierKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D7134EC2215389F100F0066E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7B51D101D56AB160023F072 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,15 +225,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D7134EC0215389F100F0066E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7134EC7215389F100F0066E /* PremierKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7B51D0D1D56AB160023F072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D7B51D281D56AFA80023F072 /* PremierDialogs.swift in Sources */,
 				D7B51D351D56B2D20023F072 /* PremierNetwork.swift in Sources */,
+				D7134ED021538E3700F0066E /* Premier+URLError.swift in Sources */,
 				D7B51D271D56AFA80023F072 /* PremierCollections.swift in Sources */,
 				D7B51D2C1D56AFA80023F072 /* PremierUIKit.swift in Sources */,
-				D7B51D331D56B2CA0023F072 /* PremierSecurity.swift in Sources */,
 				D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */,
 				D7B51D291D56AFA80023F072 /* PremierFoundation.swift in Sources */,
 				D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */,
@@ -177,7 +250,61 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D7134ECB215389F100F0066E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7B51D111D56AB160023F072 /* PremierKit */;
+			targetProxy = D7134ECA215389F100F0066E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D7134ECD215389F100F0066E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PremierKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.ricardopereira.PremierKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7134ECE215389F100F0066E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PremierKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.ricardopereira.PremierKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D7B51D181D56AB160023F072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -307,7 +434,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -327,13 +454,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = eu.ricardopereira.PremierKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D7134ECC215389F100F0066E /* Build configuration list for PBXNativeTarget "PremierKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7134ECD215389F100F0066E /* Debug */,
+				D7134ECE215389F100F0066E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D7B51D0C1D56AB160023F072 /* Build configuration list for PBXProject "PremierKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
