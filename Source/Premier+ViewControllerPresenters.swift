@@ -25,7 +25,7 @@ public protocol ViewControllerPresentErrors {
 
 public extension ViewControllerPresentErrors {
 
-    public func showError(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+    func showError(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: handler)
         alertController.addAction(okAction)
@@ -48,7 +48,7 @@ public protocol ViewControllerPresentDialogs: ViewControllerPresenter {
 
 public extension ViewControllerPresentDialogs {
 
-    public func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertAction.Style? = nil, completionAccepted: @escaping () -> Void) {
+    func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertAction.Style? = nil, completionAccepted: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: acceptButtonTitle ?? "OK", style: acceptButtonStyle ?? .default) { action in
             completionAccepted()
@@ -59,7 +59,7 @@ public extension ViewControllerPresentDialogs {
         present(alertController, animated: true, completion: nil)
     }
 
-    public func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+    func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
         alertController.addAction(okAction)
@@ -78,7 +78,7 @@ public protocol ViewControllerPresentKeyboard {
 
 public extension ViewControllerPresentKeyboard where Self: UIViewController {
 
-    public func hideKeyboard() {
+    func hideKeyboard() {
         self.view.endEditing(true)
     }
 
@@ -94,12 +94,12 @@ public protocol ViewControllerFieldValidator {
 
 public extension ViewControllerFieldValidator {
 
-    public func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         verifyContent()
         return true
     }
 
-    public func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         validateContent()
     }
 
@@ -117,7 +117,7 @@ public protocol ViewControllerPresentScroll: UITextFieldDelegate {
 
 public extension ViewControllerPresentScroll where Self: UIViewController {
 
-    public func setupScrollPresenter() {
+    func setupScrollPresenter() {
         scrollView.setupKeyboardNotifications()
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self,
             action: handleContainerTapGestureSelector))
@@ -157,7 +157,7 @@ public extension UIScrollView {
         scrollIndicatorInsets.bottom = 0
     }
 
-    public func setupKeyboardNotifications() {
+    func setupKeyboardNotifications() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillShow(_:)),
@@ -347,7 +347,7 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
 
 public extension ViewControllerPresentDialogs {
 
-    public func showPicker<T: CustomStringConvertible>(_ list: [T], completion: @escaping ((Int?) -> Void)) {
+    func showPicker<T: CustomStringConvertible>(_ list: [T], completion: @escaping ((Int?) -> Void)) {
         let pickerViewController = PickerViewController(list: list)
         present(pickerViewController, animated: true, completion: {
             completion(pickerViewController.selectedRow)
@@ -419,7 +419,7 @@ open class UIFieldSeparator: UIView {
 
 public extension UIViewController {
 
-    public func backToRootViewController(_ animated: Bool = true) {
+    func backToRootViewController(_ animated: Bool = true) {
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
         }
@@ -428,7 +428,7 @@ public extension UIViewController {
         }
     }
 
-    public func smoothlyDeselectRows(tableView: UITableView?) {
+    func smoothlyDeselectRows(tableView: UITableView?) {
         // Get the initially selected index paths, if any
         let selectedIndexPaths = tableView?.indexPathsForSelectedRows ?? []
 
@@ -478,6 +478,8 @@ extension UIGestureRecognizer.State: CustomStringConvertible {
             return "Failed"
         case .possible:
             return "Possible"
+        default:
+            fatalError("UIGestureRecognizer.State.\(self) not implemented")
         }
     }
 
