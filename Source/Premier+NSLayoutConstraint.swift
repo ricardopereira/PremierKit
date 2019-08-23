@@ -10,6 +10,18 @@ import UIKit
 
 extension NSLayoutConstraint {
 
+    @discardableResult
+    public func activate() -> NSLayoutConstraint {
+        isActive = true
+        return self
+    }
+
+    @discardableResult
+    public func deactivate() -> NSLayoutConstraint {
+        isActive = true
+        return self
+    }
+
     public func priority(of value: Float) -> NSLayoutConstraint {
         return priority(of: UILayoutPriority(value))
     }
