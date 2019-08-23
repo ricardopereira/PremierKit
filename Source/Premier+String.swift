@@ -32,4 +32,17 @@ extension String {
         return !isEmpty
     }
 
+    /// String is blank
+    public var isBlank: Bool {
+        return allSatisfy({ $0.isWhitespace })
+    }
+
+}
+
+extension Optional where Wrapped == String {
+
+    public var isBlank: Bool {
+        return self?.isBlank ?? true
+    }
+
 }
