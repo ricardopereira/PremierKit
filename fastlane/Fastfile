@@ -2,20 +2,103 @@ fastlane_version "2.98.0"
 REQUIRED_XCODE_VERSION = "9.4"
 default_platform :ios
 
+PROJECT_PLIST = "./PremierKit/Info.plist"
+
 platform :ios do
-  desc "Increment the version and build number"
-  lane :version_bump_project do |options|    
-    version_number = increment_version_number_in_plist(
-      xcodeproj: './PremierKit.xcodeproj',
-      target: 'PremierKit',
-      bump_type: options[:bump_type],
+
+  desc "(private lane) Increment the Build Number of a .plist file"
+  desc "  Parameters:"
+  desc "    plist - .plist file path"
+  private_lane :bump_build_number do |options|
+    plist_file = options[:plist]
+    build_number = get_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleVersion',
+    )
+    new_number = (build_number.to_i + 1).to_s
+    puts "Current build number is #{build_number}"
+    puts "Updated build number to #{new_number}"
+    set_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleVersion',
+      value: new_number
+    )
+  end
+
+  desc "(private lane) Increment the Build Number of a .plist file with the current date"
+  desc "  Parameters:"
+  desc "    plist - .plist file path"
+  private_lane :bump_build_number_with_date do |options|
+    plist_file = options[:plist]
+    build_number = get_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleVersion',
     )
     # Set build number to current date and time
-    build_number = Time.new.strftime("%Y.%m.%d.%H.%M")
-    increment_build_number_in_plist(
-      xcodeproj: './PremierKit.xcodeproj',
-      target: 'PremierKit',
-      build_number: build_number,
+    new_number = Time.new.strftime("%Y.%m.%d.%H.%M")
+    puts "Current build number is #{build_number}"
+    puts "Updated build number to #{new_number}"
+    set_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleVersion',
+      value: new_number
+    )
+  end
+
+  desc "(private lane) Bump the Version Number of the project"
+  desc "  Parameters:"
+  desc "    version_setting_key - .plist file path"
+  desc "    bump_type - major, minor or patch"
+  desc "    omit_zero_patch_version - true or false. Omit the patch part when it's zero"
+  private_lane :bump_version do |options|
+    plist_file = options[:plist]
+
+    current_version = get_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleShortVersionString',
+    )
+    puts "Current version number is #{current_version}"
+
+    version_number = ""
+
+    version_array = current_version.split(".").map(&:to_i)
+    case options[:bump_type]
+    when "patch"
+      version_array[2] = (version_array[2] ? version_array[2] : 0) + 1
+    when "minor"
+      version_array[1] = (version_array[1] ? version_array[1] : 0) + 1
+      version_array[2] = version_array[2] = 0
+    when "major"
+      version_array[0] = (version_array[0] ? version_array[0] : 0) + 1
+      version_array[1] = version_array[1] = 0
+      version_array[1] = version_array[2] = 0
+    end
+
+    if options[:omit_zero_patch_version] && version_array[2] == 0
+      version_array.pop()
+    end
+
+    version_number = version_array.join(".")
+
+    set_info_plist_value(
+      path: plist_file,
+      key: 'CFBundleShortVersionString',
+      value: version_number
+    )
+    puts "Updated version number to #{version_number}"
+
+    ENV["VERSION_NUMBER"] = version_number
+    version_number
+  end
+
+  desc "Increment the version and build number"
+  lane :version_bump_project do |options|
+    bump_version(
+      plist: PROJECT_PLIST,
+      bump_type: options[:bump_type],
+    )
+    bump_build_number_with_date(
+      plist: PROJECT_PLIST,
     )
   end
 
