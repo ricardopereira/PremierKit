@@ -458,29 +458,3 @@ public extension UIViewController {
     }
 
 }
-
-
-// MARK: UIGestureRecognizerState extension
-
-extension UIGestureRecognizer.State: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .began:
-            return "Began"
-        case .cancelled:
-            return "Cancelled"
-        case .changed:
-            return "Changed"
-        case .ended:
-            return "Ended"
-        case .failed:
-            return "Failed"
-        case .possible:
-            return "Possible"
-        default:
-            fatalError("UIGestureRecognizer.State.\(self) not implemented")
-        }
-    }
-
-}
