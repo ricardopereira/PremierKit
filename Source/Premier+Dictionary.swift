@@ -8,20 +8,30 @@
 
 import Foundation
 
-// Unite/Combine immutable dictionaries
-public func + <K,V> (left: Dictionary<K,V>, right: Dictionary<K,V>?) -> Dictionary<K,V> {
-    guard let right = right else { return left }
-    return left.reduce(right) {
-        var new = $0 as [K:V]
-        new.updateValue($1.1, forKey: $1.0)
-        return new
-    }
-}
+extension Dictionary {
 
-// Unite/Combine mutable dictionaries
-public func += <K,V> (left: inout Dictionary<K,V>, right: Dictionary<K,V>?) {
-    guard let right = right else { return }
-    right.forEach { key, value in
-        left.updateValue(value, forKey: key)
+    /// Unite/Combine immutable dictionaries
+    public static func +(lhs: Dictionary, rhs: Dictionary?) -> Dictionary {
+        guard let rhs = rhs else {
+            return lhs
+        }
+        return lhs.merging(rhs, uniquingKeysWith: { current, new in new })
     }
+
+    /// Unite/Combine mutable dictionaries
+    public static func +=(lhs: inout Dictionary, rhs: Dictionary?) {
+        guard let rhs = rhs else {
+            return
+        }
+        lhs.merge(rhs, uniquingKeysWith: { current, new in new })
+    }
+
+    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+    public func at(_ key: Key) -> Iterator.Element? {
+        guard let index = index(forKey: key) else {
+            return nil
+        }
+        return at(index)
+    }
+
 }

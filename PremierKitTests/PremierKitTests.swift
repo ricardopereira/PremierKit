@@ -30,4 +30,31 @@ class PremierKitTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
+    func testCombineMutableDictionaries() {
+        var data = ["John": 0]
+        data += ["Maria": 0]
+        data += ["Maria": 1]
+        data += nil
+        XCTAssertTrue(data == ["John": 0, "Maria": 1])
+    }
+
+    func testCombineImmutableDictionaries() {
+        let d1 = ["John": 0]
+        let d2 = d1 + ["Maria": 0] + ["Maria": 1]
+        let d3 = d2 + nil
+        XCTAssertTrue(d2 == ["John": 0, "Maria": 1])
+        XCTAssertTrue(d2 == d3)
+    }
+
+    func testCollectionAt() {
+        let a = [0]
+        let d = ["John": 0]
+
+        XCTAssertNotNil(a.at(0))
+        XCTAssertNil(a.at(1))
+
+        XCTAssertNotNil(d.at("John")?.value)
+        XCTAssertNil(d.at("Maria")?.value)
+    }
+
 }
