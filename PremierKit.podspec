@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PremierKit"
-  s.version          = "6.0.0"
+  s.version          = "6.1.0"
   s.summary          = "Base code for iOS apps"
   s.homepage         = "https://github.com/ricardopereira/PremierKit"
   s.license          = 'MIT'
