@@ -18,12 +18,14 @@ extension UILabel {
         self.numberOfLines = 0
     }
 
-    public convenience init(attributedText: NSAttributedString, font: UIFont, color: UIColor = .white) {
+    public convenience init(attributedText: NSAttributedString, font: UIFont?, color: UIColor = .white) {
         self.init(frame: .null)
         self.attributedText = attributedText
-        self.font = font
         self.textColor = color
         self.numberOfLines = 0
+        if let font = font {
+            self.font = font
+        }
     }
 
 }
