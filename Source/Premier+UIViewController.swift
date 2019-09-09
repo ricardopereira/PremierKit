@@ -10,13 +10,13 @@ import UIKit
 
 extension UIViewController {
 
-    func add(_ child: UIViewController) {
-        addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
+    public func add(asChildViewController viewController: UIViewController) {
+        addChild(viewController)
+        view.addSubview(viewController.view)
+        viewController.didMove(toParent: self)
     }
 
-    func remove() {
+    public func removeAsChildViewController() {
         guard parent != nil else {
             return
         }
