@@ -8,6 +8,10 @@
 
 import Foundation
 
-public func delay(_ seconds: TimeInterval, closure: @escaping ()->()) {
+public func delay(_ seconds: TimeInterval, closure: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: closure)
+}
+
+public func stop() {
+    print("⛔️ STOP")
 }

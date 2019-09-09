@@ -14,7 +14,7 @@ extension Date {
         return -timeIntervalSinceNow
     }
 
-    func isBefore(_ other: Date) -> Bool {
+    public func isBefore(_ other: Date) -> Bool {
         return self.compare(other) == ComparisonResult.orderedAscending
     }
 
