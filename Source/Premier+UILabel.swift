@@ -18,7 +18,7 @@ extension UILabel {
         self.numberOfLines = 0
     }
 
-    public convenience init(attributedText: NSAttributedString, font: UIFont?, color: UIColor = .white) {
+    public convenience init(attributedText: NSAttributedString, font: UIFont? = nil, color: UIColor = .white) {
         self.init(frame: .null)
         self.attributedText = attributedText
         self.textColor = color
