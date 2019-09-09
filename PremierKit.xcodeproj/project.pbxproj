@@ -33,6 +33,7 @@
 		D7782AC12310C44400BDA524 /* Premier+UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782AC02310C44400BDA524 /* Premier+UIDeviceOrientation.swift */; };
 		D7782EBF231E692700CB2225 /* Premier+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782EBE231E692700CB2225 /* Premier+NotificationCenter.swift */; };
 		D77887C623268740008C46C1 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77887C523268740008C46C1 /* EventTests.swift */; };
+		D77887C8232687C3008C46C1 /* Premier+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77887C7232687C3008C46C1 /* Premier+UIButton.swift */; };
 		D7B51D161D56AB160023F072 /* PremierKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B51D151D56AB160023F072 /* PremierKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B51D271D56AFA80023F072 /* Premier+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D201D56AFA80023F072 /* Premier+Dictionary.swift */; };
 		D7B51D291D56AFA80023F072 /* Premier+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D221D56AFA80023F072 /* Premier+NSObject.swift */; };
@@ -81,6 +82,7 @@
 		D7782AC02310C44400BDA524 /* Premier+UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UIDeviceOrientation.swift"; path = "Source/Premier+UIDeviceOrientation.swift"; sourceTree = SOURCE_ROOT; };
 		D7782EBE231E692700CB2225 /* Premier+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+NotificationCenter.swift"; path = "Source/Premier+NotificationCenter.swift"; sourceTree = SOURCE_ROOT; };
 		D77887C523268740008C46C1 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		D77887C7232687C3008C46C1 /* Premier+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UIButton.swift"; path = "Source/Premier+UIButton.swift"; sourceTree = SOURCE_ROOT; };
 		D7B51D121D56AB160023F072 /* PremierKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PremierKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B51D151D56AB160023F072 /* PremierKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremierKit.h; sourceTree = "<group>"; };
 		D7B51D171D56AB160023F072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				D7F8C65E2289C9D9005125FC /* Premier+URL.swift */,
 				D7134ECF21538E3700F0066E /* Premier+URLError.swift */,
 				D7782ABA2310C2B100BDA524 /* Premier+UILabel.swift */,
+				D77887C7232687C3008C46C1 /* Premier+UIButton.swift */,
 				D7134ED1215390D400F0066E /* Premier+NSLayoutConstraint.swift */,
 				D7782ABC2310C3BA00BDA524 /* Premier+UIGestureRecognizer.swift */,
 				D7134EE52153945300F0066E /* Premier+NSRegularExpression.swift */,
@@ -329,6 +332,7 @@
 				D7134EE82153949B00F0066E /* Premier+String.swift in Sources */,
 				D7B51D2C1D56AFA80023F072 /* Premier+ViewControllerPresenters.swift in Sources */,
 				D7134ED2215390D400F0066E /* Premier+NSLayoutConstraint.swift in Sources */,
+				D77887C8232687C3008C46C1 /* Premier+UIButton.swift in Sources */,
 				D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */,
 				D7B51D291D56AFA80023F072 /* Premier+NSObject.swift in Sources */,
 				D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */,
