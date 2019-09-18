@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ricardo Pereira. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIDeviceOrientation: CustomStringConvertible {
 

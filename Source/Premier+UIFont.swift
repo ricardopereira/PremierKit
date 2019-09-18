@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ricardo Pereira. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIFont {
 
