@@ -4,6 +4,9 @@
 [![Swift 5.1](https://img.shields.io/badge/Swift-5.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/ricardopereira/PremierKit/blob/master/LICENSE)
+<a href="https://github.com/ricardopereira/PremierKit/actions">
+  <img src="https://github.com/ricardopereira/PremierKit/workflows/Build/badge.svg" />
+</a>
 
 # PremierKit
 
