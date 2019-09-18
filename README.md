@@ -1,6 +1,7 @@
-<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg)](https://github.com/Carthage/Carthage)
+[![SwiftPM Compatible](https://img.shields.io/badge/SwiftPM-Compatible-brightgreen.svg)](https://swift.org/package-manager)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/PremierKit.svg?style=flat)](https://cocoapods.org/pods/PremierKit)
-[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 5.1](https://img.shields.io/badge/Swift-5.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/ricardopereira/PremierKit/blob/master/LICENSE)
 
@@ -37,13 +38,7 @@ To install it, simply add the following line to your **Podfile**:
 pod "PremierKit"
 ```
 
-You will also need to make sure you're opting into using frameworks:
-
-```ruby
-use_frameworks!
-```
-
-Then run `pod install` with CocoaPods 1.3 or newer.
+Then run `pod install` with CocoaPods 1.8 or newer.
 
 #### Manually
 
@@ -52,7 +47,7 @@ Download all the source files and drop them into your project.
 ## Requirements
 
 * iOS 9.0+
-* Xcode 10.2+ (Swift 5.0)
+* Xcode 10+ (Swift 5.0+)
 
 ## Author
 
