@@ -18,7 +18,7 @@ extension NSLayoutConstraint {
 
     @discardableResult
     public func deactivate() -> NSLayoutConstraint {
-        isActive = true
+        isActive = false
         return self
     }
 
