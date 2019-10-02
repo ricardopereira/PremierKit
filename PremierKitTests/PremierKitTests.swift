@@ -55,6 +55,8 @@ class PremierKitTests: XCTestCase {
 
         XCTAssertNotNil(d.at("John")?.value)
         XCTAssertNil(d.at("Maria")?.value)
+        XCTAssertNil(d["Maria"])
+        XCTAssertEqual(d["John"], d.at("John")?.value)
     }
 
 }
