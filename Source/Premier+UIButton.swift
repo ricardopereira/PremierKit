@@ -54,7 +54,7 @@ open class CustomButton: UIButton {
     }
 
     open func setTitle(_ title: String) {
-        setAttributedTitle(NSAttributedString(string: title.uppercased(), attributes: [
+        setAttributedTitle(NSAttributedString(string: title, attributes: [
             NSAttributedString.Key.font: self.titleFont,
             NSAttributedString.Key.foregroundColor: self.tintColor ?? .black,
         ]), for: .normal)
