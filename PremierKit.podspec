@@ -8,9 +8,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/ricardopereira/PremierKit.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/ricardopereiraw'
 
-  s.platform     = :ios, '9.0'
+  s.platform     = :ios, '10.0'
   s.requires_arc = true
-  s.swift_version = '5.0'
+  s.swift_version = '5.1'
 
   s.source_files = 'PremierKit/*.{h}', 'Source/**/*.{h,swift}'
   s.frameworks = 'UIKit'
