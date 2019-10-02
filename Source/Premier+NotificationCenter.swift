@@ -36,8 +36,8 @@ public class EventToken {
 public protocol Event: RawRepresentable {
     func emit(emitter: EventEmitter)
     func emit<A>(with object: A, emitter: EventEmitter)
-    func addObserver(emitter: EventEmitter, using block: @escaping () -> Void) -> EventToken
-    func addObserver<A>(emitter: EventEmitter, using block: @escaping (A?) -> Void) -> EventToken
+    func observe(emitter: EventEmitter, using block: @escaping () -> Void) -> EventToken
+    func observe<A>(emitter: EventEmitter, using block: @escaping (A?) -> Void) -> EventToken
 }
 
 public extension Event where Self.RawValue == String {
@@ -52,14 +52,14 @@ public extension Event where Self.RawValue == String {
         emitter.post(event)
     }
 
-    func addObserver(emitter: EventEmitter = .default, using block: @escaping () -> Void) -> EventToken {
+    func observe(emitter: EventEmitter = .default, using block: @escaping () -> Void) -> EventToken {
         let token = emitter.addObserver(forName: Notification.Name(rawValue: self.rawValue), object: nil, queue: .main, using: { _ in
             block()
         })
         return EventToken(token: token, emitter: emitter)
     }
 
-    func addObserver<A>(emitter: EventEmitter = .default, using block: @escaping (A?) -> Void) -> EventToken {
+    func observe<A>(emitter: EventEmitter = .default, using block: @escaping (A?) -> Void) -> EventToken {
         let token = emitter.addObserver(forName: NSNotification.Name(rawValue: self.rawValue), object: nil, queue: .main, using: { [eventName = self.rawValue] notification in
             if notification.object == nil {
                 block(nil)

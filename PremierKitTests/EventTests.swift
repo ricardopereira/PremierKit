@@ -30,12 +30,12 @@ class EventTests: XCTestCase {
         let fooEventObserverExpectation = XCTestExpectation(description: "addObserver")
         fooEventObserverExpectation.assertForOverFulfill = true
         fooEventObserverExpectation.expectedFulfillmentCount = 2
-        let token1 = FooEvent.foo1.addObserver { (result: Bool?) in
+        let token1 = FooEvent.foo1.observe { (result: Bool?) in
             XCTAssertNil(result)
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token1)
-        let token2 = FooEvent.foo1.addObserver {
+        let token2 = FooEvent.foo1.observe {
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token2)
@@ -49,16 +49,16 @@ class EventTests: XCTestCase {
         let fooEventObserverExpectation = XCTestExpectation(description: "addObserver")
         fooEventObserverExpectation.assertForOverFulfill = true
         fooEventObserverExpectation.expectedFulfillmentCount = 2
-        let token1 = FooEvent.foo1.addObserver { (result: String?) in
+        let token1 = FooEvent.foo1.observe { (result: String?) in
             XCTAssertEqual(result, expectedResult)
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token1)
-        let token2 = FooEvent.foo1.addObserver {
+        let token2 = FooEvent.foo1.observe {
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token2)
-        let token3 = FooEvent.foo2.addObserver {
+        let token3 = FooEvent.foo2.observe {
             XCTFail("Should not reach")
         }
         XCTAssertNotNil(token3)
@@ -71,11 +71,11 @@ class EventTests: XCTestCase {
         let fooEventObserverExpectation = XCTestExpectation(description: "addObserver")
         fooEventObserverExpectation.assertForOverFulfill = true
         fooEventObserverExpectation.expectedFulfillmentCount = 1
-        var token1: EventToken? = FooEvent.foo1.addObserver {
+        var token1: EventToken? = FooEvent.foo1.observe {
             XCTFail("Should not reach")
         }
         XCTAssertNotNil(token1)
-        let token2 = FooEvent.foo1.addObserver {
+        let token2 = FooEvent.foo1.observe {
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token2)
