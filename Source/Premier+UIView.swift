@@ -22,4 +22,26 @@ extension UIView {
         return nil
     }
 
+    // MARK: - AutoLayout
+
+    var heightLayout: NSLayoutConstraint? {
+        return constraints.filter({
+            $0.firstAttribute == .height &&
+            $0.firstAnchor === self.heightAnchor &&
+            $0.firstItem === self &&
+            $0.secondItem == nil &&
+            $0.secondAnchor == nil
+        }).first
+    }
+
+    var widthLayout: NSLayoutConstraint? {
+        return constraints.filter({
+            $0.firstAttribute == .width &&
+            $0.firstAnchor === self.widthAnchor &&
+            $0.firstItem === self &&
+            $0.secondItem == nil &&
+            $0.secondAnchor == nil
+        }).first
+    }
+
 }
