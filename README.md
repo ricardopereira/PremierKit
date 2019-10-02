@@ -49,7 +49,7 @@ Download all the source files and drop them into your project.
 
 ## Requirements
 
-* iOS 9.0+
+* iOS 10.0+
 * Xcode 10+ (Swift 5.0+)
 
 ## Author
