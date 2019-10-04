@@ -24,7 +24,7 @@ extension UIView {
 
     // MARK: - AutoLayout
 
-    var heightLayout: NSLayoutConstraint? {
+    public var heightLayout: NSLayoutConstraint? {
         return constraints.filter({
             $0.firstAttribute == .height &&
             $0.firstAnchor === self.heightAnchor &&
@@ -34,7 +34,7 @@ extension UIView {
         }).first
     }
 
-    var widthLayout: NSLayoutConstraint? {
+    public var widthLayout: NSLayoutConstraint? {
         return constraints.filter({
             $0.firstAttribute == .width &&
             $0.firstAnchor === self.widthAnchor &&
