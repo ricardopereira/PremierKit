@@ -22,9 +22,9 @@ class PremierKitTests: XCTestCase {
     func testDelay() {
         let expectation = self.expectation(description: "Delay")
         let start = Date()
-        delay(3) {
+        delay(1) {
             let end = Date()
-            XCTAssertLessThan(end.timeIntervalSince(start), 3.1)
+            XCTAssertLessThan(end.timeIntervalSince(start), 1.1)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10.0)
