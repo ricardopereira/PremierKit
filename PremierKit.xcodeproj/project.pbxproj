@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D709D05E234CD91600FD8BBE /* Premier+KVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709D05D234CD91600FD8BBE /* Premier+KVO.swift */; };
+		D709D060234CD9B200FD8BBE /* KVOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709D05F234CD9B200FD8BBE /* KVOTests.swift */; };
 		D7134EC7215389F100F0066E /* PremierKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134EC6215389F100F0066E /* PremierKitTests.swift */; };
 		D7134EC9215389F100F0066E /* PremierKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B51D121D56AB160023F072 /* PremierKit.framework */; };
 		D7134ED021538E3700F0066E /* Premier+URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134ECF21538E3700F0066E /* Premier+URLError.swift */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D709D05D234CD91600FD8BBE /* Premier+KVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+KVO.swift"; path = "Source/Premier+KVO.swift"; sourceTree = SOURCE_ROOT; };
+		D709D05F234CD9B200FD8BBE /* KVOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVOTests.swift; sourceTree = "<group>"; };
 		D7134EC4215389F100F0066E /* PremierKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PremierKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7134EC6215389F100F0066E /* PremierKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremierKitTests.swift; sourceTree = "<group>"; };
 		D7134EC8215389F100F0066E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				D7134EC6215389F100F0066E /* PremierKitTests.swift */,
+				D709D05F234CD9B200FD8BBE /* KVOTests.swift */,
 				D77887C523268740008C46C1 /* EventTests.swift */,
 				D7134EC8215389F100F0066E /* Info.plist */,
 			);
@@ -172,6 +177,7 @@
 				D7134EDD2153936000F0066E /* Premier+TextTrimmer.swift */,
 				D7782EBE231E692700CB2225 /* Premier+NotificationCenter.swift */,
 				D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */,
+				D709D05D234CD91600FD8BBE /* Premier+KVO.swift */,
 				D7134EDB2153934400F0066E /* Premier+UIFont.swift */,
 				D7F8C65E2289C9D9005125FC /* Premier+URL.swift */,
 				D7134ECF21538E3700F0066E /* Premier+URLError.swift */,
@@ -308,6 +314,7 @@
 			files = (
 				D77887C623268740008C46C1 /* EventTests.swift in Sources */,
 				D7134EC7215389F100F0066E /* PremierKitTests.swift in Sources */,
+				D709D060234CD9B200FD8BBE /* KVOTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +326,7 @@
 				D7134EE2215393B600F0066E /* Premier+UIWindow.swift in Sources */,
 				D7134EEA215394A500F0066E /* Premier+Data.swift in Sources */,
 				D7134ED82153916800F0066E /* Premier+UITableViewCell.swift in Sources */,
+				D709D05E234CD91600FD8BBE /* Premier+KVO.swift in Sources */,
 				D7134EDA215391BA00F0066E /* PremierFileManager.swift in Sources */,
 				D7134ED4215390FA00F0066E /* Premier+UIAlertController.swift in Sources */,
 				D7782AB723104A1800BDA524 /* Premier+Collection.swift in Sources */,
