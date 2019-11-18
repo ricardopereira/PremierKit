@@ -23,6 +23,7 @@ platform :ios do
       key: 'CFBundleVersion',
       value: new_number
     )
+    new_number
   end
 
   desc "(private lane) Increment the Build Number of a .plist file with the current date"
@@ -43,6 +44,7 @@ platform :ios do
       key: 'CFBundleVersion',
       value: new_number
     )
+    new_number
   end
 
   desc "(private lane) Bump the Version Number of the project"
@@ -93,19 +95,30 @@ platform :ios do
 
   desc "Increment the version and build number"
   lane :version_bump_project do |options|
-    bump_version(
+    version_number = bump_version(
       plist: PROJECT_PLIST,
       bump_type: options[:bump_type],
     )
-    bump_build_number_with_date(
+    build_number = bump_build_number_with_date(
       plist: PROJECT_PLIST,
     )
+    puts "Bump to v" + version_number + " (" + build_number + ")"
+    version_number
   end
 
   desc "Prepare a new Release version"
   lane :release do |options|
-    version_bump_project bump_type: options[:bump]
+  	ensure_git_status_clean(show_uncommitted_changes: true)
+    version_number = version_bump_project bump_type: options[:bump]
     version_bump_podspec bump_type: options[:bump]
-    clean_build_artifacts
+    git_commit(path: [
+      "./PremierKit.podspec",
+      "./PremierKit/Info.plist",
+    ], message: "Bump to v" + version_number)
+    if !git_tag_exists(tag: version_number)
+      add_git_tag(
+        tag: version_number
+      )
+    end
   end
 end
