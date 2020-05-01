@@ -117,7 +117,8 @@ platform :ios do
     ], message: "Bump to v" + version_number)
     if !git_tag_exists(tag: version_number)
       add_git_tag(
-        tag: version_number
+        tag: version_number,
+        sign: true
       )
     end
   end
