@@ -27,6 +27,12 @@ open class StaticTableView<T: StaticTableItem>: UITableView, UITableViewDelegate
 
     public var allowDeselection: Bool = true
 
+    /**
+     The total of items that can be selected.
+     If it's `0` then there's no limit.
+     */
+    public var maxNumberOfSelections: Int = 0
+
     public var selectedRows = [Int]() {
         didSet {
             onDidSelectionChanged?()
@@ -114,7 +120,7 @@ open class StaticTableView<T: StaticTableItem>: UITableView, UITableViewDelegate
             if let selectedIndex = selectedRows.firstIndex(of: indexPath.row) {
                 selectedRows.remove(at: selectedIndex)
             }
-            else {
+            else if maxNumberOfSelections <= 0 || selectedRows.count < maxNumberOfSelections {
                 selectedRows.append(indexPath.row)
             }
             tableView.reloadData()
