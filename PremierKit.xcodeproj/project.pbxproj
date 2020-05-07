@@ -29,6 +29,8 @@
 		D7134EEA215394A500F0066E /* Premier+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134EE9215394A500F0066E /* Premier+Data.swift */; };
 		D7134EEC215394AD00F0066E /* Premier+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134EEB215394AD00F0066E /* Premier+Date.swift */; };
 		D7134EEE215394B900F0066E /* Premier+URLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7134EED215394B900F0066E /* Premier+URLResponse.swift */; };
+		D732548024647CAA007F7E90 /* Premier+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = D732547F24647CAA007F7E90 /* Premier+Set.swift */; };
+		D732548224647D51007F7E90 /* OrderedSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D732548124647D51007F7E90 /* OrderedSetTests.swift */; };
 		D76CBBF223439674008BDBE5 /* Premier+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */; };
 		D7782AB723104A1800BDA524 /* Premier+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782AB623104A1800BDA524 /* Premier+Collection.swift */; };
 		D7782AB92310C2A200BDA524 /* Premier+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782AB82310C2A200BDA524 /* Premier+UIViewController.swift */; };
@@ -84,6 +86,8 @@
 		D7134EE9215394A500F0066E /* Premier+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Data.swift"; path = "Source/Premier+Data.swift"; sourceTree = SOURCE_ROOT; };
 		D7134EEB215394AD00F0066E /* Premier+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Date.swift"; path = "Source/Premier+Date.swift"; sourceTree = SOURCE_ROOT; };
 		D7134EED215394B900F0066E /* Premier+URLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+URLResponse.swift"; path = "Source/Premier+URLResponse.swift"; sourceTree = SOURCE_ROOT; };
+		D732547F24647CAA007F7E90 /* Premier+Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Set.swift"; path = "Source/Premier+Set.swift"; sourceTree = SOURCE_ROOT; };
+		D732548124647D51007F7E90 /* OrderedSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSetTests.swift; sourceTree = "<group>"; };
 		D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UserDefaults.swift"; path = "Source/Premier+UserDefaults.swift"; sourceTree = SOURCE_ROOT; };
 		D7782AB623104A1800BDA524 /* Premier+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Collection.swift"; path = "Source/Premier+Collection.swift"; sourceTree = SOURCE_ROOT; };
 		D7782AB82310C2A200BDA524 /* Premier+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UIViewController.swift"; path = "Source/Premier+UIViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -133,6 +137,7 @@
 				D709D05F234CD9B200FD8BBE /* KVOTests.swift */,
 				D709D064234D199300FD8BBE /* OperationTests.swift */,
 				D77887C523268740008C46C1 /* EventTests.swift */,
+				D732548124647D51007F7E90 /* OrderedSetTests.swift */,
 				D7134EC8215389F100F0066E /* Info.plist */,
 			);
 			path = PremierKitTests;
@@ -178,6 +183,7 @@
 				D7134EE72153949B00F0066E /* Premier+String.swift */,
 				D7134EE9215394A500F0066E /* Premier+Data.swift */,
 				D7134EEB215394AD00F0066E /* Premier+Date.swift */,
+				D732547F24647CAA007F7E90 /* Premier+Set.swift */,
 				D7B51D221D56AFA80023F072 /* Premier+NSObject.swift */,
 				D7134EED215394B900F0066E /* Premier+URLResponse.swift */,
 				D7B51D341D56B2D20023F072 /* Premier+NetworkActivityManager.swift */,
@@ -321,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D732548224647D51007F7E90 /* OrderedSetTests.swift in Sources */,
 				D77887C623268740008C46C1 /* EventTests.swift in Sources */,
 				D7134EC7215389F100F0066E /* PremierKitTests.swift in Sources */,
 				D709D060234CD9B200FD8BBE /* KVOTests.swift in Sources */,
@@ -339,6 +346,7 @@
 				D709D05E234CD91600FD8BBE /* Premier+KVO.swift in Sources */,
 				D7134EDA215391BA00F0066E /* PremierFileManager.swift in Sources */,
 				D7134ED4215390FA00F0066E /* Premier+UIAlertController.swift in Sources */,
+				D732548024647CAA007F7E90 /* Premier+Set.swift in Sources */,
 				D7782AB723104A1800BDA524 /* Premier+Collection.swift in Sources */,
 				D7782AC12310C44400BDA524 /* Premier+UIDeviceOrientation.swift in Sources */,
 				D7782ABB2310C2B100BDA524 /* Premier+UILabel.swift in Sources */,
