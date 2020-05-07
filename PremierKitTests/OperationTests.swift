@@ -58,11 +58,11 @@ class OperationTests: XCTestCase {
                 operation.finish()
             }
         }
-        operations.remove(op3)
+        operations.insert(op3)
 
         XCTAssertTrue(operations.contains(where: { $0.id == "foo" }))
-        XCTAssertTrue(operations.count == 2)
-        XCTAssertTrue(op1 == op2)
+        XCTAssertEqual(operations.count, 2)
+        XCTAssertEqual(op1, op2)
     }
 
     func testAsyncOperationsCancellationEvent() {

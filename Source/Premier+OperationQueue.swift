@@ -121,6 +121,10 @@ public class AsyncBlockOperation: Operation {
         return id == otherId
     }
 
+    override public var hash: Int {
+        return id?.hash ?? 0
+    }
+
     public override func start() {
         if isCancelled || isExecuting {
             finish()
