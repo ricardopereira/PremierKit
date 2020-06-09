@@ -59,4 +59,11 @@ class PremierKitTests: XCTestCase {
         XCTAssertEqual(d["John"], d.at("John")?.value)
     }
 
+    func testObfuscator() {
+        let o = Obfuscator(with: "sçdiouf98asufio2niuaysdf9ahsdfl")
+        let expectedResult = "john@apple.com"
+        let bytes = o.bytesByObfuscatingString(string: expectedResult)
+        XCTAssertEqual(o.reveal(key: bytes), expectedResult)
+    }
+
 }
