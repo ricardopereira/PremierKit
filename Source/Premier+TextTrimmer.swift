@@ -15,7 +15,7 @@ public protocol TextTrimmer {
 extension TextTrimmer {
 
     public var trimmedText: String {
-        return self.text?.trim ?? ""
+        return self.text?.trimmed ?? ""
     }
 
 }
