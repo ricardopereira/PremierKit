@@ -15,6 +15,12 @@ extension String {
         return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 
+    /// Truncates after a given length if string is longer than length
+    public func truncated(by length: Int) -> String {
+        let index = self.index(self.startIndex, offsetBy: min(self.count, max(0, length)))
+        return String(self[..<index])
+    }
+
     /// Email validation
     public var isEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"

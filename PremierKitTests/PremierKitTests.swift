@@ -66,4 +66,12 @@ class PremierKitTests: XCTestCase {
         XCTAssertEqual(o.reveal(key: bytes), expectedResult)
     }
 
+    func testTruncatedText() {
+        let str = "Fancy  text          "
+        XCTAssertEqual(str.truncated(by: 40), str)
+        XCTAssertEqual(str.truncated(by: 5), "Fancy")
+        XCTAssertEqual(str.truncated(by: 0), "")
+        XCTAssertEqual(str.truncated(by: -1), "")
+    }
+
 }
