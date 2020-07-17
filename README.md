@@ -10,7 +10,7 @@
 
 # PremierKit
 
-Base code for iOS apps.
+Base code for iOS/iPadOS apps.
 
 ## Installation
 
