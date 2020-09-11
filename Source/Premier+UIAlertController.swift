@@ -81,6 +81,8 @@ import UIKit
             onCompletion(result)
         }
 
+        print(textFieldObserver ?? "nil")
+
         let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: { _ in
             finish(result: nil)
         })
