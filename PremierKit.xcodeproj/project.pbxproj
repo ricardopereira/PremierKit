@@ -45,10 +45,10 @@
 		D79FB9EC245C897800929C95 /* PremierStaticTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79FB9EB245C897800929C95 /* PremierStaticTableView.swift */; };
 		D7B51D161D56AB160023F072 /* PremierKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B51D151D56AB160023F072 /* PremierKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B51D271D56AFA80023F072 /* Premier+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D201D56AFA80023F072 /* Premier+Dictionary.swift */; };
-		D7B51D291D56AFA80023F072 /* Premier+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D221D56AFA80023F072 /* Premier+NSObject.swift */; };
 		D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D241D56AFA80023F072 /* PremierTypes.swift */; };
 		D7B51D2C1D56AFA80023F072 /* Premier+ViewControllerPresenters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D251D56AFA80023F072 /* Premier+ViewControllerPresenters.swift */; };
 		D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D261D56AFA80023F072 /* PremierUtilities.swift */; };
+		D7DA9DD7251F43E3008C680D /* Premier+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA9DD6251F43E3008C680D /* Premier+Keychain.swift */; };
 		D7F8C65F2289C9D9005125FC /* Premier+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F8C65E2289C9D9005125FC /* Premier+URL.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,10 +104,10 @@
 		D7B51D151D56AB160023F072 /* PremierKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremierKit.h; sourceTree = "<group>"; };
 		D7B51D171D56AB160023F072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7B51D201D56AFA80023F072 /* Premier+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Premier+Dictionary.swift"; path = "Source/Premier+Dictionary.swift"; sourceTree = SOURCE_ROOT; };
-		D7B51D221D56AFA80023F072 /* Premier+NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Premier+NSObject.swift"; path = "Source/Premier+NSObject.swift"; sourceTree = SOURCE_ROOT; };
 		D7B51D241D56AFA80023F072 /* PremierTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierTypes.swift; path = Source/PremierTypes.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D251D56AFA80023F072 /* Premier+ViewControllerPresenters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Premier+ViewControllerPresenters.swift"; path = "Source/Premier+ViewControllerPresenters.swift"; sourceTree = SOURCE_ROOT; };
 		D7B51D261D56AFA80023F072 /* PremierUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierUtilities.swift; path = Source/PremierUtilities.swift; sourceTree = SOURCE_ROOT; };
+		D7DA9DD6251F43E3008C680D /* Premier+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Keychain.swift"; path = "Source/Premier+Keychain.swift"; sourceTree = SOURCE_ROOT; };
 		D7F8C65E2289C9D9005125FC /* Premier+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+URL.swift"; path = "Source/Premier+URL.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -185,7 +185,6 @@
 				D7134EE9215394A500F0066E /* Premier+Data.swift */,
 				D7134EEB215394AD00F0066E /* Premier+Date.swift */,
 				D732547F24647CAA007F7E90 /* Premier+Set.swift */,
-				D7B51D221D56AFA80023F072 /* Premier+NSObject.swift */,
 				D7134EED215394B900F0066E /* Premier+URLResponse.swift */,
 				D7B51D251D56AFA80023F072 /* Premier+ViewControllerPresenters.swift */,
 				D7134EDD2153936000F0066E /* Premier+TextTrimmer.swift */,
@@ -193,6 +192,7 @@
 				D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */,
 				D709D05D234CD91600FD8BBE /* Premier+KVO.swift */,
 				D709D061234D189700FD8BBE /* Premier+OperationQueue.swift */,
+				D7DA9DD6251F43E3008C680D /* Premier+Keychain.swift */,
 				D7134EDB2153934400F0066E /* Premier+UIFont.swift */,
 				D7F8C65E2289C9D9005125FC /* Premier+URL.swift */,
 				D7134ECF21538E3700F0066E /* Premier+URLError.swift */,
@@ -355,6 +355,7 @@
 				D7134EEE215394B900F0066E /* Premier+URLResponse.swift in Sources */,
 				D7134ED021538E3700F0066E /* Premier+URLError.swift in Sources */,
 				D7134EE4215393C400F0066E /* Premier+UIView.swift in Sources */,
+				D7DA9DD7251F43E3008C680D /* Premier+Keychain.swift in Sources */,
 				D7782AB92310C2A200BDA524 /* Premier+UIViewController.swift in Sources */,
 				D7B51D271D56AFA80023F072 /* Premier+Dictionary.swift in Sources */,
 				D709D063234D191D00FD8BBE /* Premier+OperationQueue.swift in Sources */,
@@ -365,7 +366,6 @@
 				D7134ED2215390D400F0066E /* Premier+NSLayoutConstraint.swift in Sources */,
 				D77887C8232687C3008C46C1 /* Premier+UIButton.swift in Sources */,
 				D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */,
-				D7B51D291D56AFA80023F072 /* Premier+NSObject.swift in Sources */,
 				D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */,
 				D7134EE02153939000F0066E /* Premier+UIScrollView.swift in Sources */,
 				D7134EDE2153936000F0066E /* Premier+TextTrimmer.swift in Sources */,
