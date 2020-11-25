@@ -86,7 +86,7 @@
 		D7134EE9215394A500F0066E /* Premier+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Data.swift"; path = "Source/Premier+Data.swift"; sourceTree = SOURCE_ROOT; };
 		D7134EEB215394AD00F0066E /* Premier+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Date.swift"; path = "Source/Premier+Date.swift"; sourceTree = SOURCE_ROOT; };
 		D7134EED215394B900F0066E /* Premier+URLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+URLResponse.swift"; path = "Source/Premier+URLResponse.swift"; sourceTree = SOURCE_ROOT; };
-		D728DB21248FC6F1005E104B /* PremierObfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremierObfuscator.swift; sourceTree = "<group>"; };
+		D728DB21248FC6F1005E104B /* PremierObfuscator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremierObfuscator.swift; path = ../Source/PremierObfuscator.swift; sourceTree = "<group>"; };
 		D732547F24647CAA007F7E90 /* Premier+Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Set.swift"; path = "Source/Premier+Set.swift"; sourceTree = SOURCE_ROOT; };
 		D732548124647D51007F7E90 /* OrderedSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSetTests.swift; sourceTree = "<group>"; };
 		D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UserDefaults.swift"; path = "Source/Premier+UserDefaults.swift"; sourceTree = SOURCE_ROOT; };
@@ -272,7 +272,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Ricardo Pereira";
 				TargetAttributes = {
 					D7134EC3215389F100F0066E = {
