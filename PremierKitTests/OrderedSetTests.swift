@@ -10,6 +10,7 @@ import XCTest
 @testable import PremierKit
 
 class OrderedSetTests: XCTestCase {
+
     func testBasics() {
         // Create an empty set.
         var set = OrderedSet<String>()
@@ -50,4 +51,27 @@ class OrderedSetTests: XCTestCase {
         XCTAssertEqual(set.remove("Hello"), nil)
         XCTAssertEqual(set.remove("cool"), nil)
     }
+
+    func testEqualToSet() {
+        let items: [String] = ["Cooler", "hello"]
+        let orderedSet1 = OrderedSet<String>(items)
+        let set1 = Set<String>(items)
+        let set2 = Set<String>(items.map({$0.lowercased()}))
+        let set3 = Set<String>(["1", "2", "3"])
+        XCTAssertTrue(orderedSet1 == set1)
+        XCTAssertTrue(set1 == orderedSet1)
+        XCTAssertFalse(orderedSet1 == set2)
+        XCTAssertFalse(set2 == orderedSet1)
+        XCTAssertFalse(orderedSet1 == set3)
+        XCTAssertFalse(set3 == orderedSet1)
+
+        let emptyOrderedSet = OrderedSet<String>()
+        let emptySet = Set<String>()
+        XCTAssertTrue(emptyOrderedSet == emptySet)
+        XCTAssertTrue(emptySet == emptyOrderedSet)
+
+        XCTAssertFalse(emptyOrderedSet == set1)
+        XCTAssertFalse(set1 == emptyOrderedSet)
+    }
+
 }

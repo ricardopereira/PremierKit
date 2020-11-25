@@ -116,7 +116,7 @@ extension OrderedSet: RandomAccessCollection {
     public var startIndex: Int { return contents.startIndex }
     public var endIndex: Int { return contents.endIndex }
     public subscript(index: Int) -> Element {
-      return contents[index]
+        return contents[index]
     }
 }
 
@@ -125,3 +125,21 @@ public func == <T>(lhs: OrderedSet<T>, rhs: OrderedSet<T>) -> Bool {
 }
 
 extension OrderedSet: Hashable where Element: Hashable { }
+
+public extension OrderedSet {
+
+    static func == (lhs: Self, rhs: Set<Self.Element>) -> Bool {
+        if lhs.isEmpty && rhs.isEmpty {
+            return true
+        }
+        return !lhs.isEmpty && lhs.reduce(true, { $0 && rhs.contains($1) })
+    }
+
+    static func == (lhs: Set<Self.Element>, rhs: Self) -> Bool {
+        if lhs.isEmpty && rhs.isEmpty {
+            return true
+        }
+        return !rhs.isEmpty && rhs.reduce(true, { $0 && lhs.contains($1) })
+    }
+
+}
