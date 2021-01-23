@@ -33,6 +33,7 @@
 		D732548024647CAA007F7E90 /* Premier+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = D732547F24647CAA007F7E90 /* Premier+Set.swift */; };
 		D732548224647D51007F7E90 /* OrderedSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D732548124647D51007F7E90 /* OrderedSetTests.swift */; };
 		D76CBBF223439674008BDBE5 /* Premier+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */; };
+		D76F078525BC38FD0094FF50 /* PremierReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76F078425BC38FD0094FF50 /* PremierReachability.swift */; };
 		D7782AB723104A1800BDA524 /* Premier+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782AB623104A1800BDA524 /* Premier+Collection.swift */; };
 		D7782AB92310C2A200BDA524 /* Premier+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782AB82310C2A200BDA524 /* Premier+UIViewController.swift */; };
 		D7782ABB2310C2B100BDA524 /* Premier+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782ABA2310C2B100BDA524 /* Premier+UILabel.swift */; };
@@ -90,6 +91,7 @@
 		D732547F24647CAA007F7E90 /* Premier+Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Set.swift"; path = "Source/Premier+Set.swift"; sourceTree = SOURCE_ROOT; };
 		D732548124647D51007F7E90 /* OrderedSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSetTests.swift; sourceTree = "<group>"; };
 		D76CBBF123439674008BDBE5 /* Premier+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UserDefaults.swift"; path = "Source/Premier+UserDefaults.swift"; sourceTree = SOURCE_ROOT; };
+		D76F078425BC38FD0094FF50 /* PremierReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PremierReachability.swift; path = Source/PremierReachability.swift; sourceTree = SOURCE_ROOT; };
 		D7782AB623104A1800BDA524 /* Premier+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+Collection.swift"; path = "Source/Premier+Collection.swift"; sourceTree = SOURCE_ROOT; };
 		D7782AB82310C2A200BDA524 /* Premier+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UIViewController.swift"; path = "Source/Premier+UIViewController.swift"; sourceTree = SOURCE_ROOT; };
 		D7782ABA2310C2B100BDA524 /* Premier+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UILabel.swift"; path = "Source/Premier+UILabel.swift"; sourceTree = SOURCE_ROOT; };
@@ -179,6 +181,7 @@
 				D7134ED9215391BA00F0066E /* PremierFileManager.swift */,
 				D79FB9EB245C897800929C95 /* PremierStaticTableView.swift */,
 				D728DB21248FC6F1005E104B /* PremierObfuscator.swift */,
+				D76F078425BC38FD0094FF50 /* PremierReachability.swift */,
 				D7B51D201D56AFA80023F072 /* Premier+Dictionary.swift */,
 				D7782AB623104A1800BDA524 /* Premier+Collection.swift */,
 				D7134EE72153949B00F0066E /* Premier+String.swift */,
@@ -368,6 +371,7 @@
 				D7B51D2B1D56AFA80023F072 /* PremierTypes.swift in Sources */,
 				D7B51D2D1D56AFA80023F072 /* PremierUtilities.swift in Sources */,
 				D7134EE02153939000F0066E /* Premier+UIScrollView.swift in Sources */,
+				D76F078525BC38FD0094FF50 /* PremierReachability.swift in Sources */,
 				D7134EDE2153936000F0066E /* Premier+TextTrimmer.swift in Sources */,
 				D7782ABF2310C42C00BDA524 /* Premier+UIUserInterfaceSizeClass.swift in Sources */,
 				D7134EE62153945300F0066E /* Premier+NSRegularExpression.swift in Sources */,
