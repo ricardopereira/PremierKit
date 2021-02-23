@@ -79,4 +79,22 @@ class PremierKitTests: XCTestCase {
         XCTAssertEqual(str.truncated(by: -1), "")
     }
 
+    func testIdentifiableHashable() {
+        struct Foo: IdentifiableHashable {
+            var id: String
+        }
+
+        let foo1 = Foo(id: "A")
+        let foo2 = Foo(id: "a")
+        let foo3 = Foo(id: "A")
+        let foo4 = Foo(id: "C")
+
+        XCTAssertEqual(foo1, foo3)
+        XCTAssertFalse(foo1 == foo4)
+        XCTAssertFalse(foo1 == foo2)
+
+        let set1 = Set<Foo>([foo1, foo2, foo3, foo4])
+        XCTAssertEqual(set1.count, 3)
+    }
+
 }
