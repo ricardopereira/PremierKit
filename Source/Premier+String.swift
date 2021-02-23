@@ -10,35 +10,43 @@ import Foundation
 
 extension String {
 
-    /// Trim whitespace
+    /// Trim whitespace.
     public var trimmed: String {
         return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 
-    /// Truncates after a given length if string is longer than length
-    public func truncated(by length: Int) -> String {
-        let index = self.index(self.startIndex, offsetBy: min(self.count, max(0, length)))
-        return String(self[..<index])
+    /// Truncate string after a given length if it is longer than the given length and add a text at the end when it overflows (ellipsis by default).
+    public func truncated(at maxLength: Int, suffix: String? = nil) -> String {
+        let value = self.trimmed
+        if value.lengthOfBytes(using: .utf8) > maxLength {
+            let index = self.index(self.startIndex, offsetBy: min(self.count, max(0, maxLength)))
+            let truncated = String(value[..<index])
+            if let suffix = suffix {
+                return truncated + suffix
+            }
+            return truncated
+        }
+        return value
     }
 
-    /// Email validation
-    public var isEmail: Bool {
+    /// Email validation.
+    var isEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 
-    /// PT Phone validation
-    public var isPhoneNumberPT: Bool {
+    /// PT Phone validation.
+    var isPhoneNumberPT: Bool {
         let phoneRegex = "\\+351[0-9]{9}"
         return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluate(with: self)
     }
 
-    /// String is not empty
+    /// String is not empty.
     public var isNotEmpty: Bool {
         return !isEmpty
     }
 
-    /// String is blank
+    /// String is blank.
     public var isBlank: Bool {
         return allSatisfy({ $0.isWhitespace })
     }

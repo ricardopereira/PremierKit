@@ -73,10 +73,18 @@ class PremierKitTests: XCTestCase {
 
     func testTruncatedText() {
         let str = "Fancy  text          "
-        XCTAssertEqual(str.truncated(by: 40), str)
-        XCTAssertEqual(str.truncated(by: 5), "Fancy")
-        XCTAssertEqual(str.truncated(by: 0), "")
-        XCTAssertEqual(str.truncated(by: -1), "")
+        XCTAssertEqual(str.truncated(at: 40), "Fancy  text")
+        XCTAssertEqual(str.truncated(at: 5), "Fancy")
+        XCTAssertEqual(str.truncated(at: 0), "")
+        XCTAssertEqual(str.truncated(at: -1), "")
+    }
+
+    func testTruncatedTextWithEllipsis() {
+        let str = "Fancy text for this beautiful test"
+        XCTAssertEqual(str.truncated(at: 40, suffix: "…"), str)
+        XCTAssertEqual(str.truncated(at: 34, suffix: "…"), str)
+        XCTAssertEqual(str.truncated(at: str.lengthOfBytes(using: .utf8), suffix: "…"), str)
+        XCTAssertEqual(str.truncated(at: 5, suffix: "…"), "Fancy…")
     }
 
     func testIdentifiableHashable() {
