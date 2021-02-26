@@ -9,8 +9,10 @@
 import Foundation
 
 /// Protocol composition with an extension to provide `Hashable` conformance to an object.
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public protocol IdentifiableHashable: Hashable & Identifiable {}
 
+@available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 public extension IdentifiableHashable {
 
     static func == (lhs: Self, rhs: Self) -> Bool {
