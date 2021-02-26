@@ -15,11 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>9.4.0</string>
+	<string>9.4.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2021.02.23.16.04</string>
+	<string>2021.02.26.16.33</string>
 	<key>NSPrincipalClass</key>
 	<string/>
 </dict>
