@@ -37,7 +37,7 @@ public extension ViewControllerPresentErrors {
 
 // MARK: ViewControllerPresentDialogs
 
-public protocol ViewControllerPresenter: class {
+public protocol ViewControllerPresenter: AnyObject {
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
 }
 
