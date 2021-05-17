@@ -20,16 +20,18 @@ public class SecretKeychain {
 
     public let bundleIdentifier: String
     public let account: String
+    public let accessible: Accessible
 
-    public init(_ account: String, bundleIdentifier: String) {
+    public init(_ account: String, bundleIdentifier: String, accessible: Accessible = .whenUnlocked) {
         self.account = account
         self.bundleIdentifier = bundleIdentifier
+        self.accessible = accessible
     }
 
     private func genericPasswordAttributes() -> [String : Any] {
         var attributes = [String: Any]()
         attributes[Class] = String(kSecClassGenericPassword)
-        attributes[AttributeAccessible] = String(kSecAttrAccessibleWhenUnlocked)
+        attributes[AttributeAccessible] = String(accessible.secAttrAccessibleValue)
         attributes[AttributeService] = bundleIdentifier
         attributes[AttributeAccount] = account
         return attributes
@@ -139,6 +141,37 @@ public class SecretKeychain {
     @discardableResult
     fileprivate func securityError(status: OSStatus) -> Error {
         return type(of: self).securityError(status: status)
+    }
+
+    // MARK: - kSecAttrAccessible
+
+    public enum Accessible {
+        case always
+        case alwaysThisDeviceOnly
+        case whenUnlocked
+        case whenPasscodeSetThisDeviceOnly
+        case whenUnlockedThisDeviceOnly
+        case afterFirstUnlockThisDeviceOnly
+        case afterFirstUnlock
+
+        fileprivate var secAttrAccessibleValue: CFString {
+            switch self {
+            case .always:
+                return kSecAttrAccessibleAlways
+            case .alwaysThisDeviceOnly:
+                return kSecAttrAccessibleAlwaysThisDeviceOnly
+            case .whenUnlocked:
+                return kSecAttrAccessibleWhenUnlocked
+            case .whenPasscodeSetThisDeviceOnly:
+                return kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly
+            case .whenUnlockedThisDeviceOnly:
+                return kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+            case .afterFirstUnlockThisDeviceOnly:
+                return kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+            case .afterFirstUnlock:
+                return kSecAttrAccessibleAfterFirstUnlock
+            }
+        }
     }
 
     // MARK: - OS Status
