@@ -49,7 +49,8 @@ public class SecretKeychain {
         var status = SecItemCopyMatching(query as CFDictionary, nil)
         switch status {
         case errSecSuccess, errSecInteractionNotAllowed:
-            var attributes = genericPasswordAttributes()
+            var attributes = [String: Any]()
+            attributes[AttributeAccount] = self.account
             attributes[ValueData] = value
             status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
             if status != errSecSuccess {
