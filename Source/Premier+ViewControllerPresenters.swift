@@ -9,27 +9,26 @@
 import UIKit
 
 
-// MARK: ViewControllerPresentContent
+// MARK: ViewControllerContentPresenter
 
-public protocol ViewControllerPresentContent {
+public protocol ViewControllerContentPresenter {
     func loadContent()
 }
 
 
-// MARK: ViewControllerPresentErrors
+// MARK: ViewControllerErrorPresenter
 
-public protocol ViewControllerPresentErrors {
-    func presentViewController(_ viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
+public protocol ViewControllerErrorPresenter {
     func showError(_ message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
-public extension ViewControllerPresentErrors {
+public extension ViewControllerErrorPresenter where Self: ViewControllerPresenter {
 
     func showError(_ message: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: handler)
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
@@ -38,15 +37,15 @@ public extension ViewControllerPresentErrors {
 // MARK: ViewControllerPresentDialogs
 
 public protocol ViewControllerPresenter: AnyObject {
-    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
+    func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
 }
 
-public protocol ViewControllerPresentDialogs: ViewControllerPresenter {
+public protocol ViewControllerDialogsPresenter {
     func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertAction.Style?, completionAccepted: @escaping () -> Void)
     func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
-public extension ViewControllerPresentDialogs {
+public extension ViewControllerDialogsPresenter where Self: ViewControllerPresenter {
 
     func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertAction.Style? = nil, completionAccepted: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -345,7 +344,7 @@ open class PickerViewController<T: CustomStringConvertible>: UIViewController, U
 
 }
 
-public extension ViewControllerPresentDialogs {
+public extension ViewControllerDialogsPresenter where Self: ViewControllerPresenter {
 
     func showPicker<T: CustomStringConvertible>(_ list: [T], completion: @escaping ((Int?) -> Void)) {
         let pickerViewController = PickerViewController(list: list)
