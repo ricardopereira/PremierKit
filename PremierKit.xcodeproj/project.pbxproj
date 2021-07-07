@@ -44,6 +44,7 @@
 		D7782EBF231E692700CB2225 /* Premier+NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7782EBE231E692700CB2225 /* Premier+NotificationCenter.swift */; };
 		D77887C623268740008C46C1 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77887C523268740008C46C1 /* EventTests.swift */; };
 		D77887C8232687C3008C46C1 /* Premier+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77887C7232687C3008C46C1 /* Premier+UIButton.swift */; };
+		D77D6C572695CB6B00462F31 /* Premier+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77D6C562695CB6B00462F31 /* Premier+UITextField.swift */; };
 		D79FB9EC245C897800929C95 /* PremierStaticTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79FB9EB245C897800929C95 /* PremierStaticTableView.swift */; };
 		D7B51D161D56AB160023F072 /* PremierKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B51D151D56AB160023F072 /* PremierKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B51D271D56AFA80023F072 /* Premier+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B51D201D56AFA80023F072 /* Premier+Dictionary.swift */; };
@@ -103,6 +104,7 @@
 		D7782EBE231E692700CB2225 /* Premier+NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+NotificationCenter.swift"; path = "Source/Premier+NotificationCenter.swift"; sourceTree = SOURCE_ROOT; };
 		D77887C523268740008C46C1 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		D77887C7232687C3008C46C1 /* Premier+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UIButton.swift"; path = "Source/Premier+UIButton.swift"; sourceTree = SOURCE_ROOT; };
+		D77D6C562695CB6B00462F31 /* Premier+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Premier+UITextField.swift"; path = "Source/Premier+UITextField.swift"; sourceTree = SOURCE_ROOT; };
 		D79FB9EB245C897800929C95 /* PremierStaticTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PremierStaticTableView.swift; path = Source/PremierStaticTableView.swift; sourceTree = SOURCE_ROOT; };
 		D7B51D121D56AB160023F072 /* PremierKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PremierKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B51D151D56AB160023F072 /* PremierKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremierKit.h; sourceTree = "<group>"; };
@@ -199,14 +201,15 @@
 				D709D05D234CD91600FD8BBE /* Premier+KVO.swift */,
 				D709D061234D189700FD8BBE /* Premier+OperationQueue.swift */,
 				D7DA9DD6251F43E3008C680D /* Premier+Keychain.swift */,
+				D7134ED1215390D400F0066E /* Premier+NSLayoutConstraint.swift */,
+				D7134EE52153945300F0066E /* Premier+NSRegularExpression.swift */,
 				D7134EDB2153934400F0066E /* Premier+UIFont.swift */,
 				D7F8C65E2289C9D9005125FC /* Premier+URL.swift */,
 				D7134ECF21538E3700F0066E /* Premier+URLError.swift */,
 				D7782ABA2310C2B100BDA524 /* Premier+UILabel.swift */,
 				D77887C7232687C3008C46C1 /* Premier+UIButton.swift */,
-				D7134ED1215390D400F0066E /* Premier+NSLayoutConstraint.swift */,
+				D77D6C562695CB6B00462F31 /* Premier+UITextField.swift */,
 				D7782ABC2310C3BA00BDA524 /* Premier+UIGestureRecognizer.swift */,
-				D7134EE52153945300F0066E /* Premier+NSRegularExpression.swift */,
 				D7134EDF2153939000F0066E /* Premier+UIScrollView.swift */,
 				D7134ED52153915E00F0066E /* Premier+UITableView.swift */,
 				D7134ED72153916800F0066E /* Premier+UITableViewCell.swift */,
@@ -345,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77D6C572695CB6B00462F31 /* Premier+UITextField.swift in Sources */,
 				D7134EEC215394AD00F0066E /* Premier+Date.swift in Sources */,
 				D7134EE2215393B600F0066E /* Premier+UIWindow.swift in Sources */,
 				D7134EEA215394A500F0066E /* Premier+Data.swift in Sources */,
