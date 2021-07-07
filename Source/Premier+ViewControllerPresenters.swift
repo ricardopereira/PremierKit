@@ -12,15 +12,18 @@ import UIKit
 // MARK: ViewControllerPresentDialogs
 
 public protocol ViewControllerPresenter: AnyObject {
-    func present(_ viewController: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
+    var tabBarController: UITabBarController? { get }
+    var navigationController: UINavigationController? { get }
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
+    func dismiss(animated flag: Bool, completion: (() -> Swift.Void)?)
 }
 
-public protocol ViewControllerDialogsPresenter {
+public protocol ViewControllerDialogsPresenter: ViewControllerPresenter {
     func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String?, acceptButtonStyle: UIAlertAction.Style?, completionAccepted: @escaping () -> Void)
     func showMessage(_ title: String, message: String, handler: ((UIAlertAction) -> Void)?)
 }
 
-public extension ViewControllerDialogsPresenter where Self: ViewControllerPresenter {
+public extension ViewControllerDialogsPresenter {
 
     func showConfimationDialog(_ title: String?, message: String?, acceptButtonTitle: String? = nil, acceptButtonStyle: UIAlertAction.Style? = nil, completionAccepted: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
