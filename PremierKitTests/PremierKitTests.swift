@@ -87,6 +87,14 @@ class PremierKitTests: XCTestCase {
         XCTAssertEqual(str.truncated(at: 5, suffix: "…"), "Fancy…")
     }
 
+    func testEmailValidation() {
+        XCTAssertFalse("x@x".isEmail())
+        XCTAssertTrue("a@b.cc".isEmail())
+        XCTAssertFalse("a.@b.cc".isEmail())
+        XCTAssertTrue("sijdf@asldj.com".isEmail())
+        XCTAssertFalse("alksd@.alsijd.asldjalsidj".isEmail())
+    }
+
     func testIdentifiableHashable() {
         if #available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *) {
             struct Foo: IdentifiableHashable {
