@@ -14,6 +14,7 @@ public class SecretKeychain {
     private let AttributeAccount = String(kSecAttrAccount)
     private let AttributeAccessible = String(kSecAttrAccessible)
     private let AttributeService = String(kSecAttrService)
+    private let AttributeAccessGroup = String(kSecAttrAccessGroup)
     private let MatchLimit = String(kSecMatchLimit)
     private let ReturnData = String(kSecReturnData)
     private let ValueData = String(kSecValueData)
@@ -21,11 +22,13 @@ public class SecretKeychain {
     public let bundleIdentifier: String
     public let account: String
     public let accessible: Accessible
+    public let accessGroup: String?
 
-    public init(_ account: String, bundleIdentifier: String, accessible: Accessible = .whenUnlocked) {
+    public init(_ account: String, bundleIdentifier: String, accessible: Accessible = .whenUnlocked, accessGroup: String? = nil) {
         self.account = account
         self.bundleIdentifier = bundleIdentifier
         self.accessible = accessible
+        self.accessGroup = accessGroup
     }
 
     private func genericPasswordAttributes() -> [String : Any] {
@@ -34,6 +37,9 @@ public class SecretKeychain {
         attributes[AttributeAccessible] = accessible.rawValue
         attributes[AttributeService] = bundleIdentifier
         attributes[AttributeAccount] = account
+        if let accessGroup = accessGroup {
+            attributes[AttributeAccessGroup] = accessGroup
+        }
         return attributes
     }
 
@@ -51,6 +57,9 @@ public class SecretKeychain {
         case errSecSuccess, errSecInteractionNotAllowed:
             var attributes = [String: Any]()
             attributes[AttributeAccount] = self.account
+            if let accessGroup = accessGroup {
+                attributes[AttributeAccessGroup] = accessGroup
+            }
             attributes[ValueData] = value
             status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
             if status != errSecSuccess {
@@ -73,6 +82,9 @@ public class SecretKeychain {
         query[MatchLimit] = kSecMatchLimitOne
         query[ReturnData] = kCFBooleanTrue
         query[AttributeAccount] = account
+        if let accessGroup = accessGroup {
+            query[AttributeAccessGroup] = accessGroup
+        }
 
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
