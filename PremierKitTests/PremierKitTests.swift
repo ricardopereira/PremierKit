@@ -115,4 +115,13 @@ class PremierKitTests: XCTestCase {
         }
     }
 
+    func testSlicingStrings() {
+        let text = """
+         <strong>Hero-ology</strong><br />
+        The Big Picture
+        """
+        XCTAssertEqual(text.slice(from: "<strong>", to: "</strong>"), "Hero-ology")
+        XCTAssertEqual(text.slice(from: "<br />"), "\nThe Big Picture")
+    }
+
 }

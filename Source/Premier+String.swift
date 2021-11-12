@@ -56,6 +56,22 @@ extension String {
         return allSatisfy({ $0.isWhitespace })
     }
 
+    /// Slice a string from/to a sequence of characters.
+    public func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+
+    /// Slice a string from a sequence of characters until the end of the string.
+    public func slice(from: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            String(self[substringFrom..<endIndex])
+        }
+    }
+
 }
 
 extension Optional where Wrapped == String {
