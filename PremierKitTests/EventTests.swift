@@ -84,4 +84,25 @@ class EventTests: XCTestCase {
         self.wait(for: [fooEventObserverExpectation], timeout: 10)
     }
 
+    func testEventTokenShouldNotReceiveEventsFromAnotherEmitter() {
+        enum AnotherFooEvent: String, Event {
+            case foo1
+            case foo2
+        }
+
+        let fooEventObserverExpectation = XCTestExpectation(description: "addObserver")
+        fooEventObserverExpectation.assertForOverFulfill = true
+        fooEventObserverExpectation.expectedFulfillmentCount = 1
+        let token1: EventToken? = AnotherFooEvent.foo1.observe {
+            XCTFail("Should not reach")
+        }
+        XCTAssertNotNil(token1)
+        let token2 = FooEvent.foo1.observe {
+            fooEventObserverExpectation.fulfill()
+        }
+        XCTAssertNotNil(token2)
+        FooEvent.foo1.emit()
+        self.wait(for: [fooEventObserverExpectation], timeout: 10)
+    }
+
 }

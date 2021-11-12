@@ -34,6 +34,7 @@ public class EventToken {
 }
 
 public protocol Event: RawRepresentable {
+    func uniqueName() -> String
     func emit(emitter: EventEmitter)
     func emit<A>(with object: A, emitter: EventEmitter)
     func observe(emitter: EventEmitter, using block: @escaping () -> Void) -> EventToken
@@ -42,25 +43,30 @@ public protocol Event: RawRepresentable {
 
 public extension Event where Self.RawValue == String {
 
+    func uniqueName() -> String {
+        let typeName = String(describing: Self.self)
+        return "\(typeName).\(self.rawValue)"
+    }
+
     func emit(emitter: EventEmitter = .default) {
-        let event = Notification(name: Notification.Name(rawValue: self.rawValue), object: nil)
+        let event = Notification(name: Notification.Name(rawValue: self.uniqueName()), object: nil)
         emitter.post(event)
     }
 
     func emit<A>(with object: A, emitter: EventEmitter = .default) {
-        let event = Notification(name: Notification.Name(rawValue: self.rawValue), object: object)
+        let event = Notification(name: Notification.Name(rawValue: self.uniqueName()), object: object)
         emitter.post(event)
     }
 
     func observe(emitter: EventEmitter = .default, using block: @escaping () -> Void) -> EventToken {
-        let token = emitter.addObserver(forName: Notification.Name(rawValue: self.rawValue), object: nil, queue: .main, using: { _ in
+        let token = emitter.addObserver(forName: Notification.Name(rawValue: self.uniqueName()), object: nil, queue: .main, using: { _ in
             block()
         })
         return EventToken(token: token, emitter: emitter)
     }
 
     func observe<A>(emitter: EventEmitter = .default, using block: @escaping (A?) -> Void) -> EventToken {
-        let token = emitter.addObserver(forName: NSNotification.Name(rawValue: self.rawValue), object: nil, queue: .main, using: { [eventName = self.rawValue] notification in
+        let token = emitter.addObserver(forName: NSNotification.Name(rawValue: self.uniqueName()), object: nil, queue: .main, using: { [eventName = self.uniqueName()] notification in
             if notification.object == nil {
                 block(nil)
             }
