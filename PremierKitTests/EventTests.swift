@@ -39,7 +39,7 @@ class EventTests: XCTestCase {
             fooEventObserverExpectation.fulfill()
         }
         XCTAssertNotNil(token2)
-        let fooEventExpectation = XCTNSNotificationExpectation(name: Notification.Name(rawValue: FooEvent.foo1.rawValue), object: nil)
+        let fooEventExpectation = XCTNSNotificationExpectation(name: Notification.Name(rawValue: FooEvent.foo1.uniqueName()), object: nil)
         FooEvent.foo1.emit()
         self.wait(for: [fooEventExpectation, fooEventObserverExpectation], timeout: 10)
     }
@@ -62,7 +62,7 @@ class EventTests: XCTestCase {
             XCTFail("Should not reach")
         }
         XCTAssertNotNil(token3)
-        let fooEventExpectation = XCTNSNotificationExpectation(name: Notification.Name(rawValue: FooEvent.foo1.rawValue), object: expectedResult)
+        let fooEventExpectation = XCTNSNotificationExpectation(name: Notification.Name(rawValue: FooEvent.foo1.uniqueName()), object: expectedResult)
         FooEvent.foo1.emit(with: expectedResult)
         self.wait(for: [fooEventExpectation, fooEventObserverExpectation], timeout: 10)
     }
@@ -103,6 +103,51 @@ class EventTests: XCTestCase {
         XCTAssertNotNil(token2)
         FooEvent.foo1.emit()
         self.wait(for: [fooEventObserverExpectation], timeout: 10)
+    }
+
+    func testStateChangesObserverEvent() {
+        final class Car: StateChangesObservable {
+            enum Event {
+                case engineChanged
+            }
+
+            weak var stateChangesObserverToken: StateChangesObserverToken<Event>?
+
+            var engineModel: Int = 0 {
+                didSet {
+                    emitStateChangeEvent(.engineChanged)
+                }
+            }
+        }
+
+        var fooEventObserverExpectation = XCTestExpectation(description: "observeStateChanges")
+        fooEventObserverExpectation.assertForOverFulfill = true
+        fooEventObserverExpectation.expectedFulfillmentCount = 1
+        let car = Car()
+        let token1 = car.observeStateChanges { event in
+            XCTFail("Should not reach")
+        }
+        XCTAssertNotNil(token1)
+        let token2 = car.observeStateChanges { event in
+            fooEventObserverExpectation.fulfill()
+        }
+        car.engineModel = 123
+        XCTAssertNotNil(token2)
+        self.wait(for: [fooEventObserverExpectation], timeout: 2)
+
+        fooEventObserverExpectation = XCTestExpectation(description: "observeStateChanges")
+        fooEventObserverExpectation.assertForOverFulfill = true
+        fooEventObserverExpectation.expectedFulfillmentCount = 1
+        fooEventObserverExpectation.isInverted = true
+        _ = car.observeStateChanges { event in
+            XCTFail("Should not reach")
+        }
+        let token4 = car.observeStateChanges { event in
+            XCTFail("Should not reach")
+        }
+        token4.invalidate()
+        car.engineModel = 222
+        self.wait(for: [fooEventObserverExpectation], timeout: 2)
     }
 
 }

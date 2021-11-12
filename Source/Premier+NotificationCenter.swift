@@ -45,7 +45,8 @@ public extension Event where Self.RawValue == String {
 
     func uniqueName() -> String {
         let typeName = String(describing: Self.self)
-        return "\(typeName).\(self.rawValue)"
+        let uniqueName = "\(typeName).\(self.rawValue)"
+        return uniqueName
     }
 
     func emit(emitter: EventEmitter = .default) {
