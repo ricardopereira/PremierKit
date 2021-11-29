@@ -25,7 +25,7 @@ open class CustomButton: UIButton {
                 if #available(iOS 10.0, *) {
                     UIViewPropertyAnimator(duration: 0.1, curve: .easeInOut) {
                         self.alpha = 0.3
-                        }.startAnimation()
+                    }.startAnimation()
                 }
                 else {
                     UIView.animate(withDuration: 0.1) {
@@ -37,7 +37,7 @@ open class CustomButton: UIButton {
                 if #available(iOS 10.0, *) {
                     UIViewPropertyAnimator(duration: 0.1, curve: .easeInOut) {
                         self.alpha = 1.0
-                        }.startAnimation()
+                    }.startAnimation()
                 }
                 else {
                     UIView.animate(withDuration: 0.1) {
