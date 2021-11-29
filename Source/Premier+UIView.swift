@@ -10,6 +10,8 @@ import UIKit
 
 extension UIView {
 
+    // MARK: - Focus
+
     public func firstResponder() -> UIView? {
         if self.isFirstResponder {
             return self
@@ -20,6 +22,14 @@ extension UIView {
             }
         }
         return nil
+    }
+
+    // MARK: - Gestures
+
+    public func removeAllGestures() {
+        gestureRecognizers?.forEach({ gesture in
+            removeGestureRecognizer(gesture)
+        })
     }
 
     // MARK: - AutoLayout
